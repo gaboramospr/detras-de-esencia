@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 
 // ─── DATOS REALES VERIFICADOS ─────────────────────────────────────────────────
@@ -647,6 +646,19 @@ const MEDIA_CASES = [
     contrasten: "Exintegrantes de la Junta de Planificación documentaron ante la OGPe que la DIA carece de estudio hidrológico. El DRNA ordenó un rediseño. El Senado aprobó dos resoluciones de investigación. Más de 70 organizaciones participaron en la marcha del 28/mar/2026 en el Viejo San Juan.",
   },
   {
+    id: "m-007",
+    medio: "Mets de Guaynabo – BSN (Baloncesto Superior Nacional)",
+    tipo: "Estrategia de imagen pública vía auspicio deportivo",
+    nivel: "alto",
+    titulo: "Esencia entra al BSN como auspiciador de los Mets de Guaynabo",
+    fecha: "Temporada BSN 2026",
+    descripcion: "El logo de Esencia aparece en los respaldos de las sillas del banquillo de los Mets en el Coliseo Fernando 'Rube' Hernández en Gurabo durante la temporada 2026.\n\n🔑 DATO CLAVE — DUEÑOS DEL EQUIPO: Los propietarios de los Mets de Guaynabo son Marc Grossman y Mark Linder, ambos residentes en Puerto Rico. Marc Grossman es beneficiario de la Ley 22 (ahora Ley 60) desde 2015, según documentó el Centro de Periodismo Investigativo. Es decir: los mismos dueños del equipo que acepta el auspicio de Esencia operan bajo el mismo marco legal (Ley 60) que otorga a Esencia ~$498 millones en créditos contributivos.\n\nLa COO del equipo, Lcda. Gabiangie Berríos, confirmó en conversación directa que gran parte de los auspicios del equipo provienen de inversionistas bajo Ley 60, y que el rol del equipo es 'el espectáculo', no cuestionar el origen del dinero de sus auspiciadores. El patrón es circular: dueños Ley 60 → auspiciador Ley 60 → mismo ecosistema de incentivos que el CPI ha documentado como fuente de desigualdad y desplazamiento en Puerto Rico.",
+    url: "https://www.facebook.com/share/p/18VRJ3maE8/",
+    evidencia: "Propietarios verificados: Marc Grossman y Mark Linder (Wikipedia Mets de Guaynabo; metsbasketball.com, dic 2019). Grossman como beneficiario de Ley 22/60 desde 2015: CPI 'Puerto Rico Act 22 Tax Incentive Fails' (jun 2021). Imágenes de La Contraparte (@gaboramospr): logo Esencia en sillas del banquillo durante juego BSN 2026. Declaración directa de COO Lcda. Gabiangie Berríos: auspicios de inversionistas Ley 60, rol del equipo es 'el espectáculo'.",
+    certainty: "confirmado",
+    contrasten: "El CPI (mar 2025) documentó que los desarrolladores de Esencia pagaron anuncios en La Voz Digital y crearon 'Conoce la verdad' como campaña de imagen. El auspicio deportivo es la fase más reciente de esa estrategia. La conexión Ley 60 es triple: (1) Esencia opera bajo Ley 60 con ~$498M en créditos; (2) los dueños del equipo son beneficiarios de Ley 60; (3) la COO confirma que los auspicios del equipo provienen de inversionistas Ley 60.",
+  },
+  {
     id: "m-006",
     medio: "Medios pagados / Cuentas anónimas (CPI documentado)",
     tipo: "Campaña de comunicación pagada previo a vistas públicas",
@@ -949,7 +961,7 @@ export default function App() {
             <div>
               <div style={{ fontSize: 10, fontFamily: "monospace", color: "#6b7280", letterSpacing: 2, textTransform: "uppercase" }}>Última verificación de datos</div>
               <div style={{ fontSize: 16, fontFamily: "monospace", color: "white", fontWeight: 700, marginTop: 2 }}>
-                10 de abril de 2026
+                16 de abril de 2026
               </div>
             </div>
           </div>
@@ -966,7 +978,8 @@ export default function App() {
           <div style={{ fontSize: 10, fontFamily: "monospace", color: "#4b5563", letterSpacing: 2, marginBottom: 10, textTransform: "uppercase" }}>Historial de actualizaciones</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {[
-              { fecha: "10 abr 2026 · 8:00 PM", descripcion: "Se agregan P.A. 114 (Código de Planificación y Permisos, gobernadora JGC) y P. del S. 1173 (Rivera Schatz) con conexión directa a Esencia. Se incorporan perfiles de Sen. María de Lourdes Santiago y Sen. Adrián González Costa (PIP) con declaraciones verificadas.", tipo: "nuevo" },
+              { fecha: "16 abr 2026", descripcion: "Se agrega caso de auspicio de Esencia a los Mets de Guaynabo en el BSN. Declaración de COO Lcda. Gabiangie Berrios sobre auspicios de inversionistas Ley 60. Marcado como ◈ REPORTADO — fuente directa.", tipo: "nuevo" },
+              { fecha: "10 abr 2026", descripcion: "Se agregan P.A. 114 (Código de Planificación y Permisos, gobernadora JGC) y P. del S. 1173 (Rivera Schatz) con conexión directa a Esencia. Se incorporan perfiles de Sen. María de Lourdes Santiago y Sen. Adrián González Costa (PIP).", tipo: "nuevo" },
               { fecha: "09 abr 2026 · 8:00 PM", descripcion: "Se agrega tab de Medios: artículo Brand Studio de El Nuevo Día, artículo Metro PR con Kany García, censura columna Rosa Seguí, InDiario vs. Gabo Ramos, La Diestra, campaña pagada CPI.", tipo: "nuevo" },
               { fecha: "09 abr 2026 · 12:00 PM", descripcion: "Datos reales integrados desde CEE y CPI: Roberto Ruiz Vargas ($30,700 donados), Will Bennett ($15,500), 11 políticos rastreados, decreto contributivo ~$498M, exención 90%.", tipo: "nuevo" },
               { fecha: "09 abr 2026 · 10:00 AM", descripcion: "Estructura inicial del dashboard. Datos mock sustituidos por información verificada de fuentes públicas.", tipo: "inicial" },
