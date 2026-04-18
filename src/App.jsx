@@ -285,7 +285,11 @@ const LEGISLATION = [
   },
 ];
 
-const POLITICIAN_PHOTOS = {
+const INVESTOR_PHOTOS = {
+  "inv-001": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/robertoruiz.jpg",
+  "inv-002": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/will.jpg",
+  "inv-003": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/harish.jpg",
+};
   "pol-001": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/thomas.jpg",
   "pol-002": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/angel.jpg",
   "pol-003": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/jesus.jpg",
@@ -293,9 +297,9 @@ const POLITICIAN_PHOTOS = {
   "pol-005": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/jenniffer.jpg",
   "pol-006": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/johnny.jpg",
   "pol-007": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/virgilio.jpg",
-  "pol-008": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/joseluis.png",
+  "pol-008": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/joseluis.png?v=2",
   "pol-009": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/miguel.jpg",
-  "pol-010": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/bobby.jpg",
+  "pol-010": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/bobby.jpg?v=2",
   "pol-011": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/tatiana.jpg",
   "pol-012": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/jorge.png",
   "pol-013": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/wanda.jpg",
@@ -439,12 +443,21 @@ function Network({ onInv, onPol }) {
 function InvProfile({ inv, onBack }) {
   const donations = inv.donations.slice().sort((a,b) => new Date(b.date) - new Date(a.date));
   const max = Math.max(...donations.map(d => d.amount), 1);
+  const photo = INVESTOR_PHOTOS[inv.id];
   return (
     <div>
       <button onClick={onBack} style={{ background: "none", border: "1px solid #374151", color: "#9ca3af", padding: "6px 14px", borderRadius: 3, cursor: "pointer", fontFamily: "monospace", fontSize: 11, marginBottom: 24 }}>← VOLVER</button>
-      <div style={{ borderLeft: "3px solid #3b82f6", paddingLeft: 16, marginBottom: 24 }}>
-        <h2 style={{ margin: 0, fontSize: 22, fontFamily: "'Georgia', serif" }}>{inv.name}</h2>
-        <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" }}><Tag color="#3b82f6">{inv.type}</Tag><Badge c={inv.certeza} /></div>
+      <div style={{ borderLeft: "3px solid #3b82f6", paddingLeft: 16, marginBottom: 24, display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+        {photo && (
+          <img src={photo} alt={inv.name}
+            style={{ width: 80, height: 80, borderRadius: "50%", objectFit: "cover", objectPosition: "top", border: "3px solid #3b82f6", filter: "grayscale(100%)", flexShrink: 0 }}
+            onError={e => e.target.style.display = "none"}
+          />
+        )}
+        <div>
+          <h2 style={{ margin: 0, fontSize: 22, fontFamily: "'Georgia', serif" }}>{inv.name}</h2>
+          <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" }}><Tag color="#3b82f6">{inv.type}</Tag><Badge c={inv.certeza} /></div>
+        </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 12, marginBottom: 28 }}>
         {[["Total donado (CEE)", fmt(inv.totalDonated), "#dc2626"],["# Donaciones", inv.donations.length, "#f59e0b"],["Entidades vinculadas", inv.relatedEntities.length, "#3b82f6"]].map(([l,v,c]) => (
@@ -836,6 +849,7 @@ export default function App() {
     { id: "legislation", label: "Acciones Gov." },
     { id: "network", label: "Red" },
     { id: "media", label: "⚠ Medios" },
+    { id: "documentales", label: "▶ Documentales" },
   ];
 
   const searchResults = q.trim().length < 2 ? [] : [
@@ -911,10 +925,19 @@ export default function App() {
           <div style={{ marginBottom: 20, fontSize: 11, fontFamily: "monospace", color: "#6b7280", letterSpacing: 1 }}>{INVESTORS.length} ENTIDADES REGISTRADAS · Haz clic para ver el perfil completo</div>
           {INVESTORS.map(inv => <Card key={inv.id} onClick={() => setSelInv(inv)} style={{ marginBottom: 12 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 10 }}>
-              <div>
-                <div style={{ display: "flex", gap: 8, marginBottom: 6, flexWrap: "wrap" }}><Tag color="#3b82f6">{inv.type}</Tag><Badge c={inv.certeza} /></div>
-                <div style={{ fontSize: 16, fontWeight: 700, color: "white" }}>{inv.name}</div>
-                <div style={{ fontSize: 12, color: "#9ca3af", marginTop: 4 }}>{inv.relatedEntities.join(" · ")}</div>
+              <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+                {INVESTOR_PHOTOS[inv.id] ? (
+                  <img src={INVESTOR_PHOTOS[inv.id]} alt={inv.name} style={{ width: 52, height: 52, borderRadius: "50%", objectFit: "cover", objectPosition: "top center", border: "2px solid #3b82f6", filter: "grayscale(100%)", flexShrink: 0 }} onError={e => e.target.style.display = "none"} />
+                ) : (
+                  <div style={{ width: 52, height: 52, borderRadius: "50%", background: "#1f2937", border: "2px solid #3b82f6", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <span style={{ fontSize: 18, color: "#3b82f6" }}>{inv.name.charAt(0)}</span>
+                  </div>
+                )}
+                <div>
+                  <div style={{ display: "flex", gap: 8, marginBottom: 6, flexWrap: "wrap" }}><Tag color="#3b82f6">{inv.type}</Tag><Badge c={inv.certeza} /></div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: "white" }}>{inv.name}</div>
+                  <div style={{ fontSize: 12, color: "#9ca3af", marginTop: 4 }}>{inv.relatedEntities.join(" · ")}</div>
+                </div>
               </div>
               {inv.totalDonated > 0 && <div style={{ textAlign: "right" }}>
                 <div style={{ fontSize: 20, fontFamily: "monospace", color: "#dc2626", fontWeight: 700 }}>{fmt(inv.totalDonated)}</div>
@@ -994,6 +1017,47 @@ export default function App() {
         </div>}
 
         {tab === "media" && <MediaView />}
+
+        {tab === "documentales" && <div>
+          <div style={{ background: "#0a0a0a", border: "1px solid #374151", borderLeft: "3px solid #dc2626", borderRadius: 4, padding: "14px 18px", marginBottom: 28 }}>
+            <div style={{ fontSize: 13, color: "#d1d5db", lineHeight: 1.8 }}>
+              Serie documental <strong style={{ color: "white" }}>La Esencia del Conflicto</strong> — producida por <strong style={{ color: "white" }}>La Contraparte (@gaboramospr)</strong>. Investigación audiovisual sobre el proyecto Esencia, sus inversionistas, el proceso de permisos y el impacto en las comunidades de Cabo Rojo y Puerto Rico.
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+            {[
+              { parte: "Parte 1", titulo: "La Esencia del Conflicto — Parte 1", id: "ouKgJfcydos" },
+              { parte: "Parte 2", titulo: "La Esencia del Conflicto — Parte 2", id: "IS8PSCwl83w" },
+              { parte: "Parte 3", titulo: "La Esencia del Conflicto — Parte 3", id: "DvVkcCeBB5A" },
+            ].map((doc, i) => (
+              <div key={i}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+                  <div style={{ width: 3, height: 18, background: "#dc2626", flexShrink: 0 }} />
+                  <div>
+                    <div style={{ fontSize: 9, fontFamily: "monospace", letterSpacing: 2, color: "#6b7280", textTransform: "uppercase" }}>{doc.parte}</div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: "white" }}>{doc.titulo}</div>
+                  </div>
+                </div>
+                <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, borderRadius: 4, overflow: "hidden", border: "1px solid #1f2937" }}>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${doc.id}`}
+                    title={doc.titulo}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 24, background: "#0a0a0a", border: "1px solid #1f2937", borderRadius: 4, padding: "12px 16px", textAlign: "center" }}>
+            <div style={{ fontSize: 10, fontFamily: "monospace", color: "#6b7280", letterSpacing: 1 }}>VER PLAYLIST COMPLETA EN YOUTUBE</div>
+            <a href="https://youtube.com/playlist?list=PLm6BQH24xmhrZVBSU_-EjffhOrxBuehui" target="_blank" rel="noopener noreferrer" style={{ color: "#dc2626", fontFamily: "monospace", fontSize: 12, marginTop: 4, display: "inline-block" }}>
+              youtube.com/playlist?list=PLm6BQH24xmhrZVBSU_-EjffhOrxBuehui
+            </a>
+          </div>
+        </div>}
 
         {tab === "network" && <div>
           <div style={{ marginBottom: 14, fontSize: 12, color: "#6b7280", fontFamily: "monospace", lineHeight: 1.8 }}>
