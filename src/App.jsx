@@ -132,7 +132,7 @@ const POLITICIANS = [
     donations: [
       { date: "2025-04-10", amount: 1000, donor: "inv-001", comite: "Comité Jenniffer González Colón Inc.", source: "CEE abr 2025", certainty: "confirmado" },
     ], legislation: ["leg-002"], statements: [] },
-  { id: "pol-006", name: "Johnny Méndez", party: "PNP", position: "Legislador PNP", totalReceived: 3100,
+  { id: "pol-006", name: "Carlos \"Johnny\" Méndez", party: "PNP", position: "Presidente de la Cámara de Representantes de Puerto Rico", totalReceived: 3100,
     donations: [
       { date: "2025-06-26", amount: 3100, donor: "inv-001", comite: "Comité Amigos Johnny Méndez", source: "CEE jun 2025", certainty: "confirmado" },
     ], legislation: [], statements: [] },
