@@ -290,6 +290,8 @@ const INVESTOR_PHOTOS = {
   "inv-002": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/will.jpg",
   "inv-003": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/harish.jpg",
 };
+
+const POLITICIAN_PHOTOS = {
   "pol-001": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/thomas.jpg",
   "pol-002": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/angel.jpg",
   "pol-003": "https://raw.githubusercontent.com/gaboramospr/detras-de-esencia/main/fotos/jesus.jpg",
