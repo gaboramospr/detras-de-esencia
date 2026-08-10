@@ -9,7 +9,7 @@ const pick = (field, lang) => (field && typeof field === "object" && "es" in fie
 const UI = {
   es: {
     tagline: "INVESTIGACIÓN · TRANSPARENCIA CIUDADANA · PUERTO RICO", lastUpdate: "ÚLTIMA ACTUALIZACIÓN · 09 AGO 2026",
-    nav: { investigacion: "Investigación", personas: "Personas", dinero: "Dinero", conexiones: "Conexiones", proyecto: "El Proyecto", cronologia: "Cronología", medios: "Medios", documentos: "Documentos", metodologia: "Fuentes" },
+    nav: { investigacion: "Investigación", personas: "Personas", dinero: "Dinero", conexiones: "Conexiones", proyecto: "El Proyecto", cronologia: "Cronología", medios: "Medios", documentos: "Documentos", metodologia: "Fuentes", apoya: "Apoya" },
     heroTitlePrefix: "Detrás de", heroSub: "El dinero. Los permisos. Las conexiones. Las personas detrás de la ciudad privada que un grupo de inversionistas pretende levantar dentro de Cabo Rojo — y que amenaza con desplazar a sus comunidades.",
     heroFoot: "Una investigación basada en documentos públicos, registros gubernamentales, datos electorales y fuentes periodísticas.",
     btnExplore: "EXPLORAR LA INVESTIGACIÓN", btnConnections: "VER LAS CONEXIONES", btnDocs: "VER DOCUMENTOS",
@@ -42,6 +42,22 @@ const UI = {
     metSub: "Detrás de Esencia utiliza documentos públicos, registros gubernamentales, datos electorales y fuentes periodísticas identificadas. Cada afirmación relevante puede rastrearse hasta su fuente.",
     primarySources: "FUENTES PRIMARIAS", pressSources: "FUENTES PERIODÍSTICAS", otherSources: "OTRAS FUENTES",
     disclaimer: "Esta plataforma es de carácter informativo y no realiza alegaciones sin evidencia documental. No constituye asesoramiento legal. Última actualización: 09 de agosto de 2026.",
+    apoyaNav: "Apoya", apoyaEyebrow: "APOYA ESTA INVESTIGACIÓN", apoyaHeroTitle: "Ayúdanos a seguir investigando",
+    apoyaHeroSub: "Detrás de Esencia es una investigación independiente. Tu aportación nos ayuda a continuar documentando, investigando y haciendo pública la información detrás del proyecto Esencia.",
+    apoyaMessageTitle: "ESTA INVESTIGACIÓN NECESITA TIEMPO, RECURSOS Y PERSONAS DISPUESTAS A SOSTENERLA",
+    apoyaMessageBody: "Investigar significa buscar documentos, analizar información, viajar, entrevistar expertos y comunidades, producir contenido audiovisual y mantener accesible toda la evidencia recopilada. Si este trabajo te parece importante, puedes ayudarnos a continuar. Cada aportación cuenta.",
+    apoyaCardTitle: "Apoya esta investigación", apoyaAmountLabel: "Elige una cantidad", apoyaOtherAmount: "Otra cantidad",
+    apoyaOnceLabel: "Aportación única", apoyaMonthlyLabel: "Aportación mensual", apoyaMonthlySoon: "Próximamente",
+    apoyaButtonPay: "APOYAR CON PAYPAL", apoyaOpensNewTab: "Se abrirá PayPal en una pestaña nueva.",
+    apoyaNotConfigured: "Configuración de PayPal pendiente — el enlace se activará en cuanto se conecte una cuenta de PayPal.",
+    apoyaTransparencyTitle: "¿Para qué se utiliza tu aportación?",
+    apoyaTransparencyNote: "Estos son ejemplos de los costos que las aportaciones ayudan a sostener — no una asignación contable exacta por dólar.",
+    apoyaCat1t: "INVESTIGACIÓN", apoyaCat1d: "Documentos, datos y búsqueda de información.",
+    apoyaCat2t: "PRODUCCIÓN", apoyaCat2d: "Grabaciones, entrevistas y contenido audiovisual.",
+    apoyaCat3t: "TRABAJO DE CAMPO", apoyaCat3d: "Viajes y documentación en las comunidades.",
+    apoyaCat4t: "PLATAFORMA", apoyaCat4d: "Hosting, herramientas y mantenimiento de DetrasDeEsencia.com.",
+    apoyaPrivacy: "Los pagos son procesados de forma segura por PayPal. Detrás de Esencia no almacena los datos de tu tarjeta ni tus credenciales de PayPal.",
+    apoyaShare: "COMPARTIR DETRÁS DE ESENCIA", apoyaBackTop: "VOLVER A LA INVESTIGACIÓN",
     footerLine1: "DETRÁS DE ESENCIA · PLATAFORMA DE TRANSPARENCIA CIUDADANA · PUERTO RICO",
     footerLine2: "Fuentes primarias: CEE · Contralor Electoral · Dept. de Estado PR · OGPe",
     footerLine3: "Fuentes periodísticas: CPI · NotiCel · El Vocero · Telemundo PR · Marea Ecologista",
@@ -54,7 +70,7 @@ const UI = {
   },
   en: {
     tagline: "INVESTIGATION · CITIZEN TRANSPARENCY · PUERTO RICO", lastUpdate: "LAST UPDATED · AUG 09, 2026",
-    nav: { investigacion: "Investigation", personas: "People", dinero: "Money", conexiones: "Connections", proyecto: "The Project", cronologia: "Timeline", medios: "Media", documentos: "Documents", metodologia: "Sources" },
+    nav: { investigacion: "Investigation", personas: "People", dinero: "Money", conexiones: "Connections", proyecto: "The Project", cronologia: "Timeline", medios: "Media", documentos: "Documents", metodologia: "Sources", apoya: "Support" },
     heroTitlePrefix: "Behind", heroSub: "The money. The permits. The connections. The people behind the private city a group of investors wants to build inside Cabo Rojo — and that threatens to displace its communities.",
     heroFoot: "An investigation based on public documents, government records, electoral data, and journalistic sources.",
     btnExplore: "EXPLORE THE INVESTIGATION", btnConnections: "SEE THE CONNECTIONS", btnDocs: "SEE DOCUMENTS",
@@ -87,6 +103,22 @@ const UI = {
     metSub: "Detrás de Esencia uses public documents, government records, electoral data, and identified journalistic sources. Every significant claim can be traced back to its source.",
     primarySources: "PRIMARY SOURCES", pressSources: "JOURNALISTIC SOURCES", otherSources: "OTHER SOURCES",
     disclaimer: "This platform is informational and does not make claims without documentary evidence. It does not constitute legal advice. Last updated: August 9, 2026.",
+    apoyaNav: "Support", apoyaEyebrow: "SUPPORT THIS INVESTIGATION", apoyaHeroTitle: "Help us keep investigating",
+    apoyaHeroSub: "Detrás de Esencia is an independent investigation. Your contribution helps us keep documenting, investigating, and publishing the information behind the Esencia project.",
+    apoyaMessageTitle: "THIS INVESTIGATION NEEDS TIME, RESOURCES, AND PEOPLE WILLING TO SUSTAIN IT",
+    apoyaMessageBody: "Investigating means finding documents, analyzing information, traveling, interviewing experts and communities, producing audiovisual content, and keeping all the evidence gathered accessible. If this work matters to you, you can help us continue. Every contribution counts.",
+    apoyaCardTitle: "Support this investigation", apoyaAmountLabel: "Choose an amount", apoyaOtherAmount: "Other amount",
+    apoyaOnceLabel: "One-time contribution", apoyaMonthlyLabel: "Monthly contribution", apoyaMonthlySoon: "Coming soon",
+    apoyaButtonPay: "SUPPORT VIA PAYPAL", apoyaOpensNewTab: "PayPal will open in a new tab.",
+    apoyaNotConfigured: "PayPal setup pending — this link will activate once a PayPal account is connected.",
+    apoyaTransparencyTitle: "What does your contribution go toward?",
+    apoyaTransparencyNote: "These are examples of the costs contributions help cover — not an exact dollar-by-dollar accounting.",
+    apoyaCat1t: "RESEARCH", apoyaCat1d: "Documents, data, and information gathering.",
+    apoyaCat2t: "PRODUCTION", apoyaCat2d: "Recordings, interviews, and video content.",
+    apoyaCat3t: "FIELD WORK", apoyaCat3d: "Travel and on-the-ground documentation in communities.",
+    apoyaCat4t: "PLATFORM", apoyaCat4d: "Hosting, tools, and maintenance for DetrasDeEsencia.com.",
+    apoyaPrivacy: "Payments are processed securely by PayPal. Detrás de Esencia does not store your card details or PayPal credentials.",
+    apoyaShare: "SHARE DETRÁS DE ESENCIA", apoyaBackTop: "BACK TO THE INVESTIGATION",
     footerLine1: "DETRÁS DE ESENCIA · CITIZEN TRANSPARENCY PLATFORM · PUERTO RICO",
     footerLine2: "Primary sources: CEE · State Electoral Comptroller · PR Dept. of State · OGPe",
     footerLine3: "Journalistic sources: CPI · NotiCel · El Vocero · Telemundo PR · Marea Ecologista",
@@ -429,6 +461,13 @@ const PROYECTO_CARDS = [
 // ═══════════════════════════════════════════════════════════════════════════
 // HELPERS / DESIGN TOKENS
 // ═══════════════════════════════════════════════════════════════════════════
+// PayPal — reemplaza este placeholder con tu usuario real de PayPal.me (ej. "TuNombre")
+// o cambia buildPaypalUrl() para usar un Hosted Button ID si prefieres un botón de donación.
+const PAYPAL_ME_USERNAME = "OriginalPuertorro";
+const PAYPAL_CONFIGURED = PAYPAL_ME_USERNAME !== "TU_USUARIO_PAYPAL";
+const buildPaypalUrl = amount => `https://www.paypal.com/paypalme/${PAYPAL_ME_USERNAME}${amount ? "/" + amount : ""}`;
+function track(event, params) { if (typeof window !== "undefined" && window.gtag) window.gtag("event", event, params || {}); }
+
 const CERT = { confirmado: { color: "#4ade80", es: "CONFIRMADO", en: "CONFIRMED" }, reportado: { color: "#fbbf24", es: "REPORTADO", en: "REPORTED" }, "en investigación": { color: "#f87171", es: "EN INVESTIGACIÓN", en: "UNDER INVESTIGATION" } };
 const TCOL = { legal: "#a78bfa", gobierno: "#60a5fa", empresa: "#38bdf8", donacion: "#dc2626", comunidad: "#2dd4bf", ambiente: "#4ade80", permisos: "#fbbf24" };
 const fmtNum = (n, lang) => n == null ? (lang === "en" ? "not specified" : "no especificado") : "$" + Number(n).toLocaleString(lang === "en" ? "en-US" : "es-PR");
@@ -650,7 +689,13 @@ export default function App() {
   const filteredMedia = MEDIA_CASES.filter(m => mediaFilter === "todos" || m.nivel === mediaFilter);
   const filteredDocs = LEGISLATION.filter(l => docFilter === "todo" || l.category === docFilter);
 
-  const NAV_IDS = ["investigacion", "personas", "dinero", "conexiones", "proyecto", "cronologia", "medios", "documentos", "metodologia"];
+  const NAV_IDS = ["investigacion", "personas", "dinero", "conexiones", "proyecto", "cronologia", "medios", "documentos", "metodologia", "apoya"];
+  const [amount, setAmount] = useState(25);
+  const [customAmount, setCustomAmount] = useState("");
+  useEffect(() => { track("support_page_view"); }, []);
+  const selectedAmount = customAmount ? Number(customAmount) : amount;
+  const handlePaypalClick = () => { track("paypal_checkout_started", { amount: selectedAmount }); if (PAYPAL_CONFIGURED) window.open(buildPaypalUrl(selectedAmount), "_blank", "noopener,noreferrer"); };
+  const handleAmountSelect = a => { setAmount(a); setCustomAmount(""); track("support_amount_selected", { amount: a }); };
 
   return (
     <div style={{ minHeight: "100vh", background: "#08080a", color: "#e4e4e7", fontFamily: "'Inter', -apple-system, sans-serif", opacity: mounted ? 1 : 0, transition: "opacity 0.5s ease", position: "relative", overflowX: "hidden" }}>
@@ -933,6 +978,66 @@ export default function App() {
         <Crystal hover={false} style={{ padding: "18px 20px", marginTop: 12 }}>
           <div style={{ fontSize: 12.5, color: "#a1a1aa", lineHeight: 1.8 }}>{ui.disclaimer}</div>
         </Crystal>
+      </section>
+
+      {/* APOYA */}
+      <section id="apoya" style={{ maxWidth: 780, margin: "0 auto", padding: "0 20px 80px", position: "relative", zIndex: 1 }}>
+        <SectionHead eyebrow={ui.apoyaEyebrow} title={ui.apoyaHeroTitle} sub={ui.apoyaHeroSub} />
+
+        <Crystal hover={false} style={{ padding: "22px 24px", marginBottom: 20 }}>
+          <div style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 2, color: "#f87171", marginBottom: 10 }}>{ui.apoyaMessageTitle}</div>
+          <p style={{ fontSize: 14, color: "#d4d4d8", lineHeight: 1.8, margin: 0 }}>{ui.apoyaMessageBody}</p>
+        </Crystal>
+
+        <Crystal hover={false} style={{ padding: "26px 24px" }}>
+          <div style={{ fontSize: 16, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: "#fafafa", marginBottom: 20 }}>{ui.apoyaCardTitle}</div>
+
+          <div style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1.5, color: "#71717a", marginBottom: 12 }}>{ui.apoyaAmountLabel}</div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 12 }}>
+            {[5, 10, 25, 50, 100].map(a => (
+              <button key={a} onClick={() => handleAmountSelect(a)} style={{
+                background: !customAmount && amount === a ? "linear-gradient(135deg, #dc2626, #b91c1c)" : "rgba(255,255,255,0.05)",
+                border: `1px solid ${!customAmount && amount === a ? "transparent" : "rgba(255,255,255,0.12)"}`,
+                color: !customAmount && amount === a ? "white" : "#e4e4e7", borderRadius: 12, padding: "14px 0", fontSize: 15,
+                fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, cursor: "pointer", transition: "all 0.15s",
+              }}>${a}</button>
+            ))}
+            <input value={customAmount} onChange={e => setCustomAmount(e.target.value.replace(/[^0-9]/g, ""))} placeholder={ui.apoyaOtherAmount}
+              style={{ background: customAmount ? "rgba(220,38,38,0.15)" : "rgba(255,255,255,0.05)", border: `1px solid ${customAmount ? "#dc2626" : "rgba(255,255,255,0.12)"}`, borderRadius: 12, padding: "14px 8px", color: "#fafafa", fontSize: 13, fontFamily: "'JetBrains Mono', monospace", textAlign: "center", outline: "none", width: "100%" }} />
+          </div>
+
+          <div style={{ display: "flex", gap: 8, marginBottom: 22 }}>
+            <div style={{ flex: 1, background: "rgba(220,38,38,0.12)", border: "1px solid rgba(220,38,38,0.3)", color: "#f87171", borderRadius: 10, padding: "10px 12px", fontSize: 11.5, fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, textAlign: "center" }}>{ui.apoyaOnceLabel}</div>
+            <div style={{ flex: 1, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", color: "#52525b", borderRadius: 10, padding: "10px 12px", fontSize: 11.5, fontFamily: "'JetBrains Mono', monospace", textAlign: "center" }}>{ui.apoyaMonthlyLabel} · {ui.apoyaMonthlySoon}</div>
+          </div>
+
+          <button onClick={handlePaypalClick} disabled={!PAYPAL_CONFIGURED} style={{
+            width: "100%", background: PAYPAL_CONFIGURED ? "linear-gradient(135deg, #0070ba, #003087)" : "rgba(255,255,255,0.06)",
+            color: PAYPAL_CONFIGURED ? "white" : "#52525b", border: "none", padding: "17px 0", fontSize: 13, fontFamily: "'JetBrains Mono', monospace",
+            fontWeight: 700, letterSpacing: 1, borderRadius: 12, cursor: PAYPAL_CONFIGURED ? "pointer" : "not-allowed",
+          }}>{ui.apoyaButtonPay}{selectedAmount ? ` · ${selectedAmount}` : ""}</button>
+          <div style={{ textAlign: "center", marginTop: 10, fontSize: 11, color: "#71717a" }}>{PAYPAL_CONFIGURED ? ui.apoyaOpensNewTab : ui.apoyaNotConfigured}</div>
+        </Crystal>
+
+        <div style={{ marginTop: 44 }}>
+          <div style={{ fontSize: 15, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: "#fafafa", marginBottom: 6 }}>{ui.apoyaTransparencyTitle}</div>
+          <p style={{ fontSize: 12, color: "#71717a", marginBottom: 18, lineHeight: 1.7 }}>{ui.apoyaTransparencyNote}</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12 }}>
+            {[[ui.apoyaCat1t, ui.apoyaCat1d], [ui.apoyaCat2t, ui.apoyaCat2d], [ui.apoyaCat3t, ui.apoyaCat3d], [ui.apoyaCat4t, ui.apoyaCat4d]].map(([t, d], i) => (
+              <Crystal key={i} hover={false} style={{ padding: "16px 16px" }}>
+                <div style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1.5, color: "#f87171", marginBottom: 8 }}>{t}</div>
+                <div style={{ fontSize: 12, color: "#a1a1aa", lineHeight: 1.6 }}>{d}</div>
+              </Crystal>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ marginTop: 28, fontSize: 11.5, color: "#71717a", lineHeight: 1.8, textAlign: "center" }}>{ui.apoyaPrivacy}</div>
+
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center", marginTop: 24 }}>
+          <button onClick={() => scrollTo("hero")} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", color: "#d4d4d8", padding: "11px 20px", fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, cursor: "pointer", borderRadius: 10 }}>{ui.apoyaBackTop}</button>
+          <button onClick={() => { if (navigator.share) navigator.share({ title: "Detrás de Esencia", url: window.location.href }); }} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", color: "#d4d4d8", padding: "11px 20px", fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, cursor: "pointer", borderRadius: 10 }}>{ui.apoyaShare}</button>
+        </div>
       </section>
 
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.08)", padding: "40px 20px", textAlign: "center", position: "relative", zIndex: 1 }}>
