@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -9,7 +10,12 @@ const pick = (field, lang) => (field && typeof field === "object" && "es" in fie
 const UI = {
   es: {
     tagline: "INVESTIGACIÓN · TRANSPARENCIA CIUDADANA · PUERTO RICO", lastUpdate: "ÚLTIMA ACTUALIZACIÓN · 09 AGO 2026",
-    nav: { investigacion: "Investigación", personas: "Personas", dinero: "Dinero", conexiones: "Conexiones", proyecto: "El Proyecto", cronologia: "Cronología", medios: "Medios", documentos: "Documentos", metodologia: "Fuentes", apoya: "Apoya" },
+    nav: { investigacion: "Investigación", personas: "Personas", dinero: "Dinero", conexiones: "Conexiones", proyecto: "El Proyecto", cronologia: "Cronología", medios: "Medios", documentos: "Documentos", metodologia: "Fuentes", apoya: "Apoya", glosario: "Glosario", dc: "Dicen vs. Confirman", descargas: "Descargas" },
+    glosarioEyebrow: "TÉRMINOS TÉCNICOS", glosarioTitle: "Glosario", glosarioSub: "Los términos legales y de permisos que más aparecen en esta investigación, explicados en simple.",
+    dcEyebrow: "CONTRASTE DIRECTO", dcTitle: "Dicen vs. Confirman", dcSub: "Lo que los proponentes de Esencia han dicho públicamente, comparado con lo que documentan las agencias, los tribunales y el expediente oficial.",
+    dcDicen: "DICEN LOS PROPONENTES", dcConfirman: "CONFIRMAN LAS AGENCIAS / EL EXPEDIENTE",
+    descargasEyebrow: "LA EVIDENCIA, EN UN CLIC", descargasTitle: "Descargas", descargasSub: "Enlaces directos a los documentos y fuentes originales citados en esta investigación. Todos abren la fuente primaria o la nota periodística que la documenta.",
+    descargasBtn: "VER DOCUMENTO →",
     heroTitlePrefix: "Detrás de", heroSub: "El dinero. Los permisos. Las conexiones. Las personas detrás de la ciudad privada que un grupo de inversionistas pretende levantar dentro de Cabo Rojo — y que amenaza con desplazar a sus comunidades.",
     heroFoot: "Una investigación basada en documentos públicos, registros gubernamentales, datos electorales y fuentes periodísticas.",
     btnExplore: "EXPLORAR LA INVESTIGACIÓN", btnConnections: "VER LAS CONEXIONES", btnDocs: "VER DOCUMENTOS",
@@ -70,7 +76,12 @@ const UI = {
   },
   en: {
     tagline: "INVESTIGATION · CITIZEN TRANSPARENCY · PUERTO RICO", lastUpdate: "LAST UPDATED · AUG 09, 2026",
-    nav: { investigacion: "Investigation", personas: "People", dinero: "Money", conexiones: "Connections", proyecto: "The Project", cronologia: "Timeline", medios: "Media", documentos: "Documents", metodologia: "Sources", apoya: "Support" },
+    nav: { investigacion: "Investigation", personas: "People", dinero: "Money", conexiones: "Connections", proyecto: "The Project", cronologia: "Timeline", medios: "Media", documentos: "Documents", metodologia: "Sources", apoya: "Support", glosario: "Glossary", dc: "Claims vs. Facts", descargas: "Downloads" },
+    glosarioEyebrow: "TECHNICAL TERMS", glosarioTitle: "Glossary", glosarioSub: "The legal and permitting terms that come up most in this investigation, explained simply.",
+    dcEyebrow: "DIRECT CONTRAST", dcTitle: "Claims vs. Facts", dcSub: "What Esencia's developers have said publicly, compared with what agencies, courts, and the official filing document.",
+    dcDicen: "DEVELOPERS CLAIM", dcConfirman: "AGENCIES / THE RECORD CONFIRM",
+    descargasEyebrow: "THE EVIDENCE, ONE CLICK AWAY", descargasTitle: "Downloads", descargasSub: "Direct links to the documents and original sources cited in this investigation. Every link opens the primary source or the news report documenting it.",
+    descargasBtn: "VIEW DOCUMENT →",
     heroTitlePrefix: "Behind", heroSub: "The money. The permits. The connections. The people behind the private city a group of investors wants to build inside Cabo Rojo — and that threatens to displace its communities.",
     heroFoot: "An investigation based on public documents, government records, electoral data, and journalistic sources.",
     btnExplore: "EXPLORE THE INVESTIGATION", btnConnections: "SEE THE CONNECTIONS", btnDocs: "SEE DOCUMENTS",
@@ -491,6 +502,64 @@ const TIMELINE = [
     t: "comunidad", source: "Connecticut Public Radio, 1/sep/2026" },
 ];
 
+const GLOSSARY = [
+  { term: "DIA", d: L("Declaración de Impacto Ambiental. Documento que evalúa el impacto ambiental de un proyecto. Su aprobación NO autoriza, por sí sola, a construir.", "Environmental Impact Statement. A document evaluating a project's environmental impact. Its approval does NOT, by itself, authorize construction.") },
+  { term: "OGPe", d: L("Oficina de Gerencia de Permisos. La agencia que evalúa y aprueba permisos, consultas de ubicación y declaraciones ambientales en Puerto Rico.", "Permit Management Office. The agency that reviews and approves permits, location consultations, and environmental statements in Puerto Rico.") },
+  { term: L("Consulta de Ubicación", "Location Consultation"), d: L("Determinación de la OGPe sobre si un uso de terreno es cónsono con la zonificación del área. No es un permiso de construcción.", "OGPe's determination on whether a land use is consistent with the area's zoning. It is not a construction permit.") },
+  { term: "DRNA", d: L("Departamento de Recursos Naturales y Ambientales. Otorga las franquicias para extraer agua y evalúa el impacto ecológico de un proyecto.", "Dept. of Natural and Environmental Resources. Grants water extraction franchises and evaluates a project's ecological impact.") },
+  { term: "AAA / AEE", d: L("Autoridad de Acueductos y Alcantarillados (agua potable) y Autoridad de Energía Eléctrica (electricidad) — las agencias públicas de infraestructura básica de Puerto Rico.", "Aqueduct and Sewer Authority (drinking water) and Electric Power Authority (electricity) — Puerto Rico's basic public infrastructure agencies.") },
+  { term: L("Franquicia de extracción", "Extraction franchise"), d: L("Autorización del DRNA para extraer agua de pozos o cuerpos de agua. Esencia todavía no la tiene.", "DRNA authorization to extract water from wells or bodies of water. Esencia does not have one yet.") },
+  { term: L("Proyecto Estratégico", "Strategic Project"), d: L("Designación bajo la ley federal PROMESA que puede acelerar los procesos de permisos de un proyecto.", "A designation under the federal PROMESA law that can speed up a project's permitting process.") },
+  { term: "CRIM", d: L("Centro de Recaudación de Ingresos Municipales. Recauda la contribución sobre la propiedad que financia a los municipios de Puerto Rico.", "Municipal Revenue Collection Center. Collects the property tax that funds Puerto Rico's municipalities.") },
+  { term: "MGD", d: L("Millones de galones diarios. Unidad usada para medir el consumo de agua de un proyecto o una región.", "Millions of gallons per day. A unit used to measure a project's or region's water consumption.") },
+  { term: L("Cuerda", "Cuerda"), d: L("Unidad de medida de terreno usada en Puerto Rico, equivalente a unos 0.971 acres.", "A land-measurement unit used in Puerto Rico, equal to about 0.971 acres.") },
+  { term: L("Fianza (Ley 82-2026)", "Bond (Act 82-2026)"), d: L("Depósito económico que la ley vigente exige para poder paralizar judicialmente una obra de construcción — hoy no menor al 10% del valor del proyecto.", "A monetary deposit current law requires to seek a judicial stay of construction — currently no less than 10% of the project's value.") },
+];
+
+const DICEN_CONFIRMAN = [
+  { tema: L("Agua", "Water"),
+    dicen: L("Serán autosuficientes con pozos propios y una planta de ósmosis inversa.", "They'll be self-sufficient with their own wells and a reverse-osmosis plant."),
+    confirman: L("La AAA y la AEE dicen que no hay capacidad. El DRNA no ha otorgado franquicia de extracción. Solo llevan 3 exploraciones de pozos.", "The AAA and AEE say there's no capacity. DRNA hasn't granted an extraction franchise. Only 3 well explorations have been done so far."),
+    fuente: "NotiCel, 2/sep/2026; El Vocero, 3/ago/2026" },
+  { tema: L("Permisos", "Permits"),
+    dicen: L("\"Esencia obtiene aprobación para avanzar con su desarrollo\" — titular basado en su propio comunicado.", "\"Esencia gets approval to move forward with its development\" — headline based on their own statement."),
+    confirman: L("El secretario de Asuntos Públicos y la OGPe aclararon: solo se aprobó la ubicación, no la construcción entera.", "The Secretary of Public Affairs and OGPe clarified: only the location was approved, not construction as a whole."),
+    fuente: "El Nuevo Día, 31/jul/2026; NotiCel, 6/ago/2026" },
+  { tema: L("Respaldo comunitario", "Community backing"),
+    dicen: L("Dejaron la impresión de que el expolítico Santos \"El Negro\" Ortiz Ruiz respaldaba el proyecto.", "They left the impression that former politician Santos \"El Negro\" Ortiz Ruiz supported the project."),
+    confirman: L("La senadora Santiago Negrón corrigió en la vista del Senado: Ortiz Ruiz en realidad se opone a Esencia.", "Senator Santiago Negrón corrected the record at the Senate hearing: Ortiz Ruiz actually opposes Esencia."),
+    fuente: "NotiCel, 2/sep/2026" },
+  { tema: L("Empleos y economía", "Jobs and the economy"),
+    dicen: L("El proyecto traerá desarrollo económico y oportunidad a la región.", "The project will bring economic development and opportunity to the region."),
+    confirman: L("La Asociación de Economistas de PR: los empleos que crearía pagan cerca del salario mínimo, sin beneficio público proporcional.", "The PR Association of Economists: the jobs it would create pay near minimum wage, with no proportional public benefit."),
+    fuente: "Resolución 2026-02, 20/ago/2026" },
+  { tema: L("Basura", "Trash"),
+    dicen: L("\"Si el municipio no lo puede atender, usaremos operadores privados.\"", "\"If the municipality can't handle it, we'll use private operators.\""),
+    confirman: L("No presentaron ningún plan en la vista del Senado. De los 3 vertederos que mencionan, uno no está disponible y otro cierra en 2029.", "They presented no plan at the Senate hearing. Of the 3 landfills they cite, one is unavailable and another closes in 2029."),
+    fuente: "NotiCel, 2/sep/2026" },
+  { tema: L("Transparencia", "Transparency"),
+    dicen: L("\"Desde el principio hemos mantenido comunicación abierta y disponible con los grupos de interés.\"", "\"From the start we've kept open, available communication with stakeholder groups.\""),
+    confirman: L("Se negaron a contestar 25 preguntas formales del representante Emilio Carlo Acosta y a compartir documentos.", "They refused to answer 25 formal questions from Rep. Emilio Carlo Acosta and to share documents."),
+    fuente: "CPI, jun 2025; NotiCel, 6/ago/2026" },
+  { tema: L("Escala del proyecto", "Project scale"),
+    dicen: L("Describen 500 habitaciones de hotel, 1,200 residencias y dos campos de golf.", "They describe 500 hotel rooms, 1,200 residences, and two golf courses."),
+    confirman: L("El expediente oficial de OGPe cita 828 unidades residenciales y un hotel de 307 habitaciones — cifras distintas a las que se comunican públicamente.", "OGPe's official filing cites 828 residential units and a 307-room hotel — figures that differ from what's communicated publicly."),
+    fuente: "Marea Ecologista, 31/jul/2026" },
+];
+
+const DOWNLOADS = [
+  { t: L("P. de la C. 1363 — texto oficial de la medida", "H.B. 1363 — official bill text"), tipo: L("DOCUMENTO LEGISLATIVO", "LEGISLATIVE DOCUMENT"), date: "17 ago 2026", url: "https://sutra.oslpr.org/SutraFilesGen/161888/PC1363.docx" },
+  { t: L("P. de la C. 1363 — trámite legislativo (SUTRA)", "H.B. 1363 — legislative record (SUTRA)"), tipo: L("REGISTRO OFICIAL", "OFFICIAL RECORD"), date: "17 ago 2026", url: "https://sutra.oslpr.org/medidas/161888" },
+  { t: L("Ley 82-2026 — texto completo", "Act 82-2026 — full text"), tipo: L("LEY VIGENTE", "CURRENT LAW"), date: "2026", url: "https://www.lexjuris.com/lexlex/Leyes2026/lexl2026082.htm" },
+  { t: L("Resolución 2026-02 — Asociación de Economistas de PR", "Resolution 2026-02 — PR Association of Economists"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "20 ago 2026", url: "https://www.elnuevodia.com/noticias/locales/notas/asociacion-de-economistas-advierte-que-beneficios-de-esencia-no-compensarian-costos-y-riesgos-para-cabo-rojo/" },
+  { t: L("Aprobación de la Consulta de Ubicación — expediente OGPe", "Location Consultation approval — OGPe filing"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "31 jul 2026", url: "https://mareaecologista.com/2026/07/estocada-a-cabo-rojo-ogpe-aprueba-la-consulta-de-ubicacion-del-megaproyecto-esencia/" },
+  { t: L("Investigación del representante Emilio Carlo Acosta", "Rep. Emilio Carlo Acosta's investigation"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "6 ago 2026", url: "https://noticel.com/noticias/20260806/esencia-no-tiene-agua-luz-ni-espacio-para-su-basura-revela-investigacion-de-representante-pnp/" },
+  { t: L("Segunda vista pública del Senado — basura y agua sin resolver", "Second Senate public hearing — trash and water unresolved"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "2 sep 2026", url: "https://noticel.com/noticias/20260902/esencia-sin-claridad-el-manejo-de-basura/" },
+  { t: L("Repudio a la aprobación de la DIA — Juan Dalmau", "Repudiation of environmental review approval — Juan Dalmau"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "26 dic 2025", url: "https://www.telemundopr.com/noticias/puerto-rico/juan-dalmau-repudia-aprobacion-de-cumplimiento-ambiental-sobre-proyecto-esencia/2775051/" },
+  { t: L("La AAA confirma que no tiene capacidad de agua", "AAA confirms it has no water capacity"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "3 ago 2026", url: "https://www.elvocero.com/gobierno/agencias/aaa-reitera-que-no-recomend-el-proyecto-esencia-por-falta-de-capacidad-para-suplir-agua/article_e25d6711-3750-4a51-9134-0fea0590a44c.html" },
+  { t: L("Manifiesto \"Declarado: Esencia No Va\"", "\"Declarado: Esencia No Va\" manifesto"), tipo: L("MANIFIESTO CIUDADANO", "CITIZEN MANIFESTO"), date: "16 ago 2026", url: "https://www.declaradoesencianova.com" },
+];
+
 const PROYECTO_CARDS = [
   { t: L("AGUA", "WATER"), d: L("La AAA y la AEE confirmaron que no tienen capacidad para suplirle agua potable. El propio proyecto reconoció ante el Senado que necesitaría 1,253,306 galones diarios y 12 megavatios. Los desarrolladores dicen que serán autosuficientes, pero solo llevan tres exploraciones de pozos sin poder demostrar capacidad ante el DRNA, y su plan de respaldo —una planta de ósmosis inversa— todavía necesita permiso del Cuerpo de Ingenieros del Ejército de EE.UU.",
       "The AAA and AEE confirmed they have no capacity to supply drinking water. The project itself told the Senate it would need 1,253,306 gallons daily and 12 megawatts. Developers say they'll be self-sufficient, but have only completed three well explorations without being able to demonstrate capacity to DRNA, and their backup plan — a reverse-osmosis plant — still needs a permit from the U.S. Army Corps of Engineers."), src: "NotiCel, 2/sep/2026; El Vocero, 3/ago/2026" },
@@ -545,6 +614,9 @@ function SourceChip({ children }) {
 }
 function Tag({ children, color = "#a1a1aa" }) {
   return <span style={{ fontSize: 9.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, color, border: `1px solid ${color}44`, background: `${color}12`, padding: "3px 8px", borderRadius: 20, textTransform: "uppercase", display: "inline-block" }}>{children}</span>;
+}
+function Divider() {
+  return <div style={{ height: 1, background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.1) 15%, rgba(255,255,255,0.1) 85%, transparent)" }} />;
 }
 function EsenciaMark({ children = "ESENCIA" }) {
   return <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, textTransform: "uppercase", letterSpacing: "-0.03em", backgroundImage: "linear-gradient(135deg, #f87171, #dc2626)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>{children}</span>;
@@ -739,7 +811,7 @@ export default function App() {
   const filteredMedia = MEDIA_CASES.filter(m => mediaFilter === "todos" || m.nivel === mediaFilter);
   const filteredDocs = LEGISLATION.filter(l => docFilter === "todo" || l.category === docFilter);
 
-  const NAV_IDS = ["investigacion", "personas", "dinero", "conexiones", "proyecto", "cronologia", "medios", "documentos", "metodologia", "apoya"];
+  const NAV_IDS = ["investigacion", "personas", "dinero", "conexiones", "proyecto", "cronologia", "medios", "documentos", "metodologia", "glosario", "dc", "descargas", "apoya"];
   const [amount, setAmount] = useState(25);
   const [customAmount, setCustomAmount] = useState("");
   useEffect(() => { track("support_page_view"); }, []);
@@ -1030,6 +1102,63 @@ export default function App() {
         </Crystal>
       </section>
 
+      {/* GLOSARIO */}
+      <section id="glosario" style={{ maxWidth: 780, margin: "0 auto", padding: "0 20px 70px", position: "relative", zIndex: 1 }}>
+        <SectionHead eyebrow={ui.glosarioEyebrow} title={ui.glosarioTitle} sub={ui.glosarioSub} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {GLOSSARY.map((g, i) => (
+            <Crystal key={i} hover={false} style={{ padding: "16px 20px" }}>
+              <div style={{ fontSize: 13, fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, color: "#f87171", marginBottom: 6 }}>{pick(g.term, lang)}</div>
+              <div style={{ fontSize: 13, color: "#a1a1aa", lineHeight: 1.7 }}>{pick(g.d, lang)}</div>
+            </Crystal>
+          ))}
+        </div>
+      </section>
+
+      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 20px" }}><Divider /></div>
+
+      {/* DICEN VS CONFIRMAN */}
+      <section id="dc" style={{ maxWidth: 900, margin: "0 auto", padding: "70px 20px", position: "relative", zIndex: 1 }}>
+        <SectionHead eyebrow={ui.dcEyebrow} title={ui.dcTitle} sub={ui.dcSub} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {DICEN_CONFIRMAN.map((row, i) => (
+            <Crystal key={i} hover={false} style={{ padding: "20px 20px" }}>
+              <div style={{ fontSize: 13, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: "#fafafa", marginBottom: 14 }}>{pick(row.tema, lang)}</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 14 }}>
+                <div style={{ borderLeft: "3px solid #f87171", paddingLeft: 14 }}>
+                  <div style={{ fontSize: 9.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1.5, color: "#f87171", marginBottom: 6 }}>{ui.dcDicen}</div>
+                  <div style={{ fontSize: 13, color: "#d4d4d8", lineHeight: 1.7, fontStyle: "italic" }}>{pick(row.dicen, lang)}</div>
+                </div>
+                <div style={{ borderLeft: "3px solid #4ade80", paddingLeft: 14 }}>
+                  <div style={{ fontSize: 9.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1.5, color: "#4ade80", marginBottom: 6 }}>{ui.dcConfirman}</div>
+                  <div style={{ fontSize: 13, color: "#d4d4d8", lineHeight: 1.7 }}>{pick(row.confirman, lang)}</div>
+                </div>
+              </div>
+              <div style={{ marginTop: 12 }}><SourceChip>{row.fuente}</SourceChip></div>
+            </Crystal>
+          ))}
+        </div>
+      </section>
+
+      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 20px" }}><Divider /></div>
+
+      {/* DESCARGAS */}
+      <section id="descargas" style={{ maxWidth: 780, margin: "0 auto", padding: "70px 20px", position: "relative", zIndex: 1 }}>
+        <SectionHead eyebrow={ui.descargasEyebrow} title={ui.descargasTitle} sub={ui.descargasSub} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {DOWNLOADS.map((d, i) => (
+            <Crystal key={i} hover={false} style={{ padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+              <div>
+                <Tag color="#a1a1aa">{pick(d.tipo, lang)}</Tag>
+                <div style={{ fontSize: 14, color: "#fafafa", marginTop: 8 }}>{pick(d.t, lang)}</div>
+                <div style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", color: "#71717a", marginTop: 4 }}>{d.date}</div>
+              </div>
+              <a href={d.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", color: "#60a5fa", whiteSpace: "nowrap" }}>{ui.descargasBtn}</a>
+            </Crystal>
+          ))}
+        </div>
+      </section>
+
       {/* APOYA */}
       <section id="apoya" style={{ maxWidth: 780, margin: "0 auto", padding: "0 20px 80px", position: "relative", zIndex: 1 }}>
         <SectionHead eyebrow={ui.apoyaEyebrow} title={ui.apoyaHeroTitle} sub={ui.apoyaHeroSub} />
@@ -1065,7 +1194,7 @@ export default function App() {
             width: "100%", background: PAYPAL_CONFIGURED ? "linear-gradient(135deg, #0070ba, #003087)" : "rgba(255,255,255,0.06)",
             color: PAYPAL_CONFIGURED ? "white" : "#52525b", border: "none", padding: "17px 0", fontSize: 13, fontFamily: "'JetBrains Mono', monospace",
             fontWeight: 700, letterSpacing: 1, borderRadius: 12, cursor: PAYPAL_CONFIGURED ? "pointer" : "not-allowed",
-          }}>{ui.apoyaButtonPay}{selectedAmount ? ` · ${selectedAmount}` : ""}</button>
+          }}>{ui.apoyaButtonPay}{selectedAmount ? ` · $${selectedAmount}` : ""}</button>
           <div style={{ textAlign: "center", marginTop: 10, fontSize: 11, color: "#71717a" }}>{PAYPAL_CONFIGURED ? ui.apoyaOpensNewTab : ui.apoyaNotConfigured}</div>
         </Crystal>
 
