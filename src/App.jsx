@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -9,7 +8,7 @@ const pick = (field, lang) => (field && typeof field === "object" && "es" in fie
 
 const UI = {
   es: {
-    tagline: "INVESTIGACIÓN · TRANSPARENCIA CIUDADANA · PUERTO RICO", lastUpdate: "ÚLTIMA ACTUALIZACIÓN · 09 AGO 2026",
+    tagline: "INVESTIGACIÓN · TRANSPARENCIA CIUDADANA · PUERTO RICO",     lastUpdate: "ÚLTIMA ACTUALIZACIÓN · 02 SEP 2026",
     nav: { investigacion: "Investigación", personas: "Personas", dinero: "Dinero", conexiones: "Conexiones", proyecto: "El Proyecto", cronologia: "Cronología", medios: "Medios", documentos: "Documentos", metodologia: "Fuentes", apoya: "Apoya", glosario: "Glosario", dc: "Dicen vs. Confirman", descargas: "Descargas" },
     glosarioEyebrow: "TÉRMINOS TÉCNICOS", glosarioTitle: "Glosario", glosarioSub: "Los términos legales y de permisos que más aparecen en esta investigación, explicados en simple.",
     dcEyebrow: "CONTRASTE DIRECTO", dcTitle: "Dicen vs. Confirman", dcSub: "Lo que los proponentes de Esencia han dicho públicamente, comparado con lo que documentan las agencias, los tribunales y el expediente oficial.",
@@ -75,7 +74,7 @@ const UI = {
     directImpact: "IMPACTO DIRECTO", indirectImpact: "IMPACTO INDIRECTO",
   },
   en: {
-    tagline: "INVESTIGATION · CITIZEN TRANSPARENCY · PUERTO RICO", lastUpdate: "LAST UPDATED · AUG 09, 2026",
+    tagline: "INVESTIGATION · CITIZEN TRANSPARENCY · PUERTO RICO",     lastUpdate: "LAST UPDATED · SEP 02, 2026",
     nav: { investigacion: "Investigation", personas: "People", dinero: "Money", conexiones: "Connections", proyecto: "The Project", cronologia: "Timeline", medios: "Media", documentos: "Documents", metodologia: "Sources", apoya: "Support", glosario: "Glossary", dc: "Claims vs. Facts", descargas: "Downloads" },
     glosarioEyebrow: "TECHNICAL TERMS", glosarioTitle: "Glossary", glosarioSub: "The legal and permitting terms that come up most in this investigation, explained simply.",
     dcEyebrow: "DIRECT CONTRAST", dcTitle: "Claims vs. Facts", dcSub: "What Esencia's developers have said publicly, compared with what agencies, courts, and the official filing document.",
@@ -610,10 +609,10 @@ function EvidenceBadge({ c, lang }) {
   </span>;
 }
 function SourceChip({ children }) {
-  return <span style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5, color: "#a1a1aa", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "3px 9px", display: "inline-block" }}>→ {children}</span>;
+  return <span style={{ fontSize: 11.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 0.5, color: "#c4c4c9", background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.14)", borderRadius: 20, padding: "4px 10px", display: "inline-block" }}>→ {children}</span>;
 }
-function Tag({ children, color = "#a1a1aa" }) {
-  return <span style={{ fontSize: 9.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, color, border: `1px solid ${color}44`, background: `${color}12`, padding: "3px 8px", borderRadius: 20, textTransform: "uppercase", display: "inline-block" }}>{children}</span>;
+function Tag({ children, color = "#c4c4c9" }) {
+  return <span style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, color, border: `1px solid ${color}66`, background: `${color}18`, padding: "4px 9px", borderRadius: 20, textTransform: "uppercase", display: "inline-block", fontWeight: 600 }}>{children}</span>;
 }
 function Divider() {
   return <div style={{ height: 1, background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.1) 15%, rgba(255,255,255,0.1) 85%, transparent)" }} />;
@@ -633,48 +632,56 @@ function SectionHead({ eyebrow, title, sub, id }) {
 // NETWORK
 // ═══════════════════════════════════════════════════════════════════════════
 function Network({ onSelectEdge, onSelectNode, mobile }) {
+  const [selected, setSelected] = useState(null);
   const nodes = {
-    "inv-001": { x: 90, y: 55, label: "Ruiz Vargas", t: "investor" }, "inv-002": { x: 90, y: 140, label: "Will Bennett", t: "investor" },
-    "inv-003": { x: 90, y: 225, label: "Venkatesh", t: "investor" }, "inv-004": { x: 90, y: 300, label: "Three Rules", t: "company" },
-    "inv-005": { x: 90, y: 365, label: "Reuben Bros.", t: "company" }, "inv-006": { x: 250, y: 210, label: "CRLA LLC", t: "entity" },
-    "pol-001": { x: 420, y: 25, label: "Rivera Schatz", t: "pol" }, "pol-002": { x: 420, y: 95, label: "Matos García", t: "pol" },
-    "pol-004": { x: 420, y: 165, label: "PNP", t: "pol" }, "pol-005": { x: 420, y: 235, label: "JGC Gov.", t: "pol" },
-    "pol-009": { x: 420, y: 305, label: "Romero Lugo", t: "pol" }, "pol-010": { x: 420, y: 375, label: "Ramírez Kurtz", t: "pol" },
-    "leg-001": { x: 570, y: 120, label: "$498M Decreto", t: "leg" }, "leg-008": { x: 570, y: 260, label: "Consulta Ubic.", t: "leg" },
+    "inv-001": { x: 120, y: 60,  label: "Ruiz Vargas", t: "investor" }, "inv-002": { x: 120, y: 155, label: "Will Bennett", t: "investor" },
+    "inv-003": { x: 120, y: 250, label: "Venkatesh", t: "investor" }, "inv-004": { x: 120, y: 335, label: "Three Rules", t: "company" },
+    "inv-005": { x: 120, y: 405, label: "Reuben Bros.", t: "company" }, "inv-006": { x: 350, y: 230, label: "CRLA LLC", t: "entity" },
+    "pol-001": { x: 610, y: 30,  label: "Rivera Schatz", t: "pol" }, "pol-002": { x: 610, y: 105, label: "Matos García", t: "pol" },
+    "pol-004": { x: 610, y: 180, label: "PNP", t: "pol" }, "pol-005": { x: 610, y: 255, label: "JGC Gov.", t: "pol" },
+    "pol-009": { x: 610, y: 330, label: "Romero Lugo", t: "pol" }, "pol-010": { x: 610, y: 405, label: "Ramírez Kurtz", t: "pol" },
+    "leg-001": { x: 840, y: 140, label: "$498M Decreto", t: "leg" }, "leg-008": { x: 840, y: 320, label: "Consulta Ubic.", t: "leg" },
   };
-  const ts = { investor: { fill: "#0c1220", stroke: "#60a5fa", r: 17 }, company: { fill: "#0c1220", stroke: "#38bdf8", r: 15 }, entity: { fill: "#160c22", stroke: "#a78bfa", r: 19 }, pol: { fill: "#1a0a0a", stroke: "#f87171", r: 17 }, leg: { fill: "#08150c", stroke: "#4ade80", r: 15 } };
+  const ts = { investor: { fill: "#0c1220", stroke: "#60a5fa", r: 21 }, company: { fill: "#0c1220", stroke: "#38bdf8", r: 19 }, entity: { fill: "#160c22", stroke: "#a78bfa", r: 23 }, pol: { fill: "#1a0a0a", stroke: "#f87171", r: 21 }, leg: { fill: "#08150c", stroke: "#4ade80", r: 19 } };
   const links = [
-    { s: "inv-001", t: "inv-006", c: "#60a5fa55", label: "vehículo legal común" }, { s: "inv-002", t: "inv-006", c: "#60a5fa55", label: "vehículo legal común" },
-    { s: "inv-004", t: "inv-006", c: "#38bdf855", label: "co-desarrolladora" }, { s: "inv-005", t: "inv-006", c: "#38bdf855", label: "co-financiadora" },
-    { s: "inv-001", t: "pol-001", c: "#dc262677", label: "$3,100 donado — CEE oct 2024" }, { s: "inv-001", t: "pol-002", c: "#dc262677", label: "$3,100 donado — CEE oct 2024" },
-    { s: "inv-001", t: "pol-004", c: "#dc262677", label: "$3,100 donado — CEE jun 2025" }, { s: "inv-001", t: "pol-009", c: "#dc262677", label: "$3,100 donado — CEE sep 2024" },
-    { s: "inv-001", t: "pol-010", c: "#dc262677", label: "$3,100 donado — CEE oct 2024" }, { s: "inv-002", t: "pol-001", c: "#b91c1c77", label: "$3,100 donado — CEE 2024" },
-    { s: "inv-002", t: "pol-010", c: "#b91c1c77", label: "$3,100 donado — CEE nov 2024" }, { s: "inv-006", t: "leg-001", c: "#4ade8055", label: "titular del decreto — ~$498M" },
-    { s: "inv-006", t: "leg-008", c: "#4ade8055", label: "titular de la consulta de ubicación" }, { s: "pol-005", t: "leg-008", c: "#a1a1aa55", label: "administración vigente" },
+    { s: "inv-001", t: "inv-006", c: "#60a5fa70", label: "vehículo legal común" }, { s: "inv-002", t: "inv-006", c: "#60a5fa70", label: "vehículo legal común" },
+    { s: "inv-004", t: "inv-006", c: "#38bdf870", label: "co-desarrolladora" }, { s: "inv-005", t: "inv-006", c: "#38bdf870", label: "co-financiadora" },
+    { s: "inv-001", t: "pol-001", c: "#dc2626aa", label: "$3,100 donado — CEE oct 2024" }, { s: "inv-001", t: "pol-002", c: "#dc2626aa", label: "$3,100 donado — CEE oct 2024" },
+    { s: "inv-001", t: "pol-004", c: "#dc2626aa", label: "$3,100 donado — CEE jun 2025" }, { s: "inv-001", t: "pol-009", c: "#dc2626aa", label: "$3,100 donado — CEE sep 2024" },
+    { s: "inv-001", t: "pol-010", c: "#dc2626aa", label: "$3,100 donado — CEE oct 2024" }, { s: "inv-002", t: "pol-001", c: "#b91c1caa", label: "$3,100 donado — CEE 2024" },
+    { s: "inv-002", t: "pol-010", c: "#b91c1caa", label: "$3,100 donado — CEE nov 2024" }, { s: "inv-006", t: "leg-001", c: "#4ade8070", label: "titular del decreto — ~$498M" },
+    { s: "inv-006", t: "leg-008", c: "#4ade8070", label: "titular de la consulta de ubicación" }, { s: "pol-005", t: "leg-008", c: "#c4c4c970", label: "administración vigente" },
   ];
   if (mobile) {
     return <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-      {links.map((l, i) => <div key={i} onClick={() => onSelectEdge({ from: nodes[l.s].label, to: nodes[l.t].label, label: l.label })}
-        style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, cursor: "pointer" }}>
-        <span style={{ fontSize: 13, color: "#e4e4e7", flex: 1 }}>{nodes[l.s].label}</span><span style={{ color: "#71717a", fontSize: 12 }}>→</span>
-        <span style={{ fontSize: 13, color: "#e4e4e7", flex: 1, textAlign: "right" }}>{nodes[l.t].label}</span>
-      </div>)}
+      {links.map((l, i) => <button key={i} onClick={() => onSelectEdge({ from: nodes[l.s].label, to: nodes[l.t].label, label: l.label })}
+        style={{ display: "flex", alignItems: "center", gap: 10, padding: "16px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, cursor: "pointer", textAlign: "left", width: "100%" }}>
+        <span style={{ fontSize: 14, color: "#e4e4e7", flex: 1 }}>{nodes[l.s].label}</span><span style={{ color: "#71717a", fontSize: 13 }}>→</span>
+        <span style={{ fontSize: 14, color: "#e4e4e7", flex: 1, textAlign: "right" }}>{nodes[l.t].label}</span>
+      </button>)}
     </div>;
   }
   return (
-    <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
-      <svg width={660} height={410} style={{ display: "block", minWidth: 660 }}>
-        {links.map((l, i) => { const s = nodes[l.s], t = nodes[l.t]; return (
-          <line key={i} x1={s.x} y1={s.y} x2={t.x} y2={t.y} stroke={l.c} strokeWidth={1.4} style={{ cursor: "pointer" }} onClick={() => onSelectEdge({ from: s.label, to: t.label, label: l.label })} />
-        ); })}
+    <div>
+      <svg viewBox="0 0 940 440" style={{ display: "block", width: "100%", height: "auto" }}>
+        {links.map((l, i) => {
+          const s = nodes[l.s], t = nodes[l.t];
+          const active = !selected || l.s === selected || l.t === selected;
+          return <line key={i} x1={s.x} y1={s.y} x2={t.x} y2={t.y} stroke={l.c} strokeWidth={active ? 2.2 : 1} strokeOpacity={active ? 1 : 0.15} style={{ cursor: "pointer", transition: "all 0.15s" }} onClick={() => onSelectEdge({ from: s.label, to: t.label, label: l.label })} />;
+        })}
         {Object.entries(nodes).map(([id, pos]) => {
           const s = ts[pos.t]; const obj = INVESTORS.find(x => x.id === id) || POLITICIANS.find(x => x.id === id);
-          return <g key={id} style={{ cursor: obj ? "pointer" : "default" }} onClick={() => obj && onSelectNode(obj, INVESTORS.includes(obj) ? "inv" : "pol")}>
-            <circle cx={pos.x} cy={pos.y} r={s.r} fill={s.fill} stroke={s.stroke} strokeWidth={1.5} />
-            <text x={pos.x} y={pos.y + s.r + 13} textAnchor="middle" fill="#a1a1aa" fontSize={9} fontFamily="'JetBrains Mono', monospace">{pos.label}</text>
+          const connected = !selected || id === selected || links.some(l => (l.s === selected && l.t === id) || (l.t === selected && l.s === id));
+          return <g key={id} style={{ cursor: obj ? "pointer" : "default", opacity: connected ? 1 : 0.3, transition: "opacity 0.15s" }}
+            onClick={() => { setSelected(sel => sel === id ? null : id); obj && onSelectNode(obj, INVESTORS.includes(obj) ? "inv" : "pol"); }}>
+            <circle cx={pos.x} cy={pos.y} r={s.r} fill={s.fill} stroke={id === selected ? "#fafafa" : s.stroke} strokeWidth={id === selected ? 3 : 2} />
+            <text x={pos.x} y={pos.y + s.r + 16} textAnchor="middle" fill="#d4d4d8" fontSize={12} fontWeight={600} fontFamily="'JetBrains Mono', monospace">{pos.label}</text>
           </g>;
         })}
       </svg>
+      {selected && <div style={{ marginTop: 10, textAlign: "center" }}>
+        <button onClick={() => setSelected(null)} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.14)", color: "#c4c4c9", borderRadius: 20, padding: "6px 16px", fontSize: 11.5, fontFamily: "'JetBrains Mono', monospace", cursor: "pointer" }}>✕ Limpiar selección</button>
+      </div>}
     </div>
   );
 }
@@ -768,6 +775,10 @@ function PersonModal({ person, kind, onClose, lang, ui }) {
 // ═══════════════════════════════════════════════════════════════════════════
 export default function App() {
   const [mounted, setMounted] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+  const [showAllPol, setShowAllPol] = useState(false);
+  const [showAllTl, setShowAllTl] = useState(false);
+  const [expandedDocs, setExpandedDocs] = useState({});
   const [lang, setLang] = useState("es");
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -789,9 +800,24 @@ export default function App() {
     check(); window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+  useEffect(() => {
+    const ids = ["personas", "dinero", "conexiones", "documentos"];
+    const onScroll = () => {
+      let current = "hero";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 150) current = id;
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const openPerson = (id, kind) => setModal({ person: kind === "pol" ? getPol(id) : getInv(id), kind });
   const scrollTo = id => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); setSearchOpen(false); setMenuOpen(false); setLangOpen(false); };
+  const toggleDoc = id => setExpandedDocs(p => ({ ...p, [id]: !p[id] }));
 
   const searchResults = q.trim().length < 2 ? [] : [
     ...INVESTORS.filter(i => i.name.toLowerCase().includes(q.toLowerCase())).map(i => ({ type: "inv", item: i })),
@@ -852,6 +878,16 @@ export default function App() {
             </div>}
             <button onClick={() => setMenuOpen(v => !v)} aria-label="Menu" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 20, color: "#e4e4e7", width: 38, height: 38, cursor: "pointer", fontSize: 15 }}>{menuOpen ? "×" : "☰"}</button>
           </div>
+        </div>
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 20px 12px", display: "flex", gap: 8, flexWrap: "wrap" }} aria-label="Navegación rápida">
+          {["personas", "dinero", "conexiones", "documentos"].map(id => (
+            <button key={id} onClick={() => scrollTo(id)} aria-current={activeSection === id ? "true" : "false"} style={{
+              background: activeSection === id ? "rgba(220,38,38,0.22)" : "rgba(255,255,255,0.05)",
+              border: `1px solid ${activeSection === id ? "#dc2626" : "rgba(255,255,255,0.12)"}`,
+              color: activeSection === id ? "#fca5a5" : "#c4c4c9", borderRadius: 20, padding: "8px 16px",
+              fontSize: 12.5, fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, letterSpacing: 0.5, cursor: "pointer",
+            }}>{ui.nav[id]}</button>
+          ))}
         </div>
         {menuOpen && (
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", padding: "16px 20px 24px" }}>
@@ -974,6 +1010,19 @@ export default function App() {
       {/* EL PROYECTO */}
       <section id="proyecto" style={{ maxWidth: 900, margin: "0 auto", padding: "0 20px 70px", position: "relative", zIndex: 1 }}>
         <SectionHead eyebrow={ui.proyectoEyebrow} title={ui.proyectoTitle} sub={ui.proyectoSub} />
+        <Crystal hover={false} style={{ padding: 18, marginBottom: 14 }}>
+          <div style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 2, color: "#f87171", marginBottom: 10 }}>{lang === "es" ? "MAPA VERIFICADO — BOQUERÓN, CABO ROJO" : "VERIFIED MAP — BOQUERÓN, CABO ROJO"}</div>
+          <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <img src="https://staticmap.openstreetmap.de/staticmap.php?center=17.9950,-67.1800&zoom=13&size=640x320&maptype=mapnik&markers=17.9950,-67.1800,red"
+              alt="Mapa de Boquerón, Cabo Rojo" width="100%" style={{ display: "block", width: "100%", height: "auto" }} loading="lazy"
+              onError={e => { e.target.style.display = "none"; }} />
+          </div>
+          <a href="https://www.openstreetmap.org/?mlat=17.9950&mlon=-67.1800#map=13/17.9950/-67.1800" target="_blank" rel="noopener noreferrer"
+            style={{ display: "inline-block", marginTop: 10, fontSize: 11.5, fontFamily: "'JetBrains Mono', monospace", color: "#60a5fa" }}>
+            {lang === "es" ? "ABRIR MAPA INTERACTIVO →" : "OPEN INTERACTIVE MAP →"}
+          </a>
+          <div style={{ marginTop: 10, fontSize: 12, color: "#a1a1aa", lineHeight: 1.6 }}>{lang === "es" ? "Mapa de OpenStreetMap centrado en el sector Boquerón de Cabo Rojo, referencia geográfica del área donde se propone Esencia — no representa los límites exactos del proyecto." : "OpenStreetMap centered on the Boquerón sector of Cabo Rojo, a geographic reference for the area where Esencia is proposed — it does not represent the project's exact boundaries."}</div>
+        </Crystal>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 14 }}>
           {PROYECTO_CARDS.map((c, i) => <Crystal key={i} style={{ padding: "20px 20px" }} hover={false}>
             <div style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 2, color: "#f87171", marginBottom: 10 }}>{pick(c.t, lang)}</div>
@@ -991,20 +1040,21 @@ export default function App() {
             <button key={f} onClick={() => setTlFilter(f)} style={{ background: tlFilter === f ? "linear-gradient(135deg,#dc2626,#b91c1c)" : "rgba(255,255,255,0.04)", color: tlFilter === f ? "white" : "#a1a1aa", border: `1px solid ${tlFilter === f ? "transparent" : "rgba(255,255,255,0.1)"}`, padding: "7px 13px", borderRadius: 20, cursor: "pointer", fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: 1, textTransform: "uppercase" }}>{ui.filters[f]}</button>
           ))}
         </div>
-        {filteredTl.map((ev, i) => (
+        {(showAllTl ? filteredTl : filteredTl.slice(-6)).map((ev, i, arr) => (
           <div key={i} style={{ display: "flex", gap: 14, marginBottom: 30 }}>
-            <div style={{ flexShrink: 0, width: 74, textAlign: "right" }}><div style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", color: "#71717a" }}>{ev.label}</div></div>
+            <div style={{ flexShrink: 0, width: 74, textAlign: "right" }}><div style={{ fontSize: 11.5, fontFamily: "'JetBrains Mono', monospace", color: "#a1a1aa" }}>{ev.label}</div></div>
             <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
               <div style={{ width: 9, height: 9, borderRadius: "50%", background: TCOL[ev.t], marginTop: 4, boxShadow: `0 0 8px ${TCOL[ev.t]}` }} />
-              {i < filteredTl.length - 1 && <div style={{ width: 1, flex: 1, background: "rgba(255,255,255,0.1)", marginTop: 6 }} />}
+              {i < arr.length - 1 && <div style={{ width: 1, flex: 1, background: "rgba(255,255,255,0.1)", marginTop: 6 }} />}
             </div>
             <div style={{ paddingBottom: 4 }}>
               <div style={{ fontSize: 15, color: "#fafafa", lineHeight: 1.4, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700 }}>{pick(ev.e, lang)}</div>
-              <div style={{ fontSize: 13, color: "#a1a1aa", marginTop: 6, lineHeight: 1.6 }}>{pick(ev.detail, lang)}</div>
+              <div style={{ fontSize: 13.5, color: "#c4c4c9", marginTop: 6, lineHeight: 1.6 }}>{pick(ev.detail, lang)}</div>
               <div style={{ marginTop: 8 }}><SourceChip>{ev.source}</SourceChip></div>
             </div>
           </div>
         ))}
+        {!showAllTl && filteredTl.length > 6 && <button onClick={() => setShowAllTl(true)} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.14)", color: "#c4c4c9", padding: "12px 22px", fontSize: 12, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 1, cursor: "pointer", borderRadius: 10 }}>{lang === "es" ? "VER CRONOLOGÍA COMPLETA (DESDE 2019) →" : "SEE FULL TIMELINE (SINCE 2019) →"}</button>}
       </section>
 
       {/* MEDIOS */}
@@ -1046,7 +1096,14 @@ export default function App() {
             <div style={{ fontSize: 17, color: "#fafafa", marginBottom: 6, lineHeight: 1.4, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700 }}>{pick(leg.title, lang)}</div>
             {leg.subtitle && <div style={{ fontSize: 12, color: "#71717a", marginBottom: 10 }}>{pick(leg.subtitle, lang)}</div>}
             <div style={{ fontSize: 10.5, color: "#71717a", fontFamily: "'JetBrains Mono', monospace", marginBottom: 10 }}>{leg.date}</div>
-            <p style={{ fontSize: 12.5, color: "#a1a1aa", lineHeight: 1.8, marginBottom: 10 }}>{pick(leg.description, lang)}</p>
+            <p style={{ fontSize: 13.5, color: "#c4c4c9", lineHeight: 1.8, marginBottom: 10 }}>
+              {expandedDocs[leg.id] || pick(leg.description, lang).length <= 260 ? pick(leg.description, lang) : pick(leg.description, lang).slice(0, 260) + "…"}
+            </p>
+            {pick(leg.description, lang).length > 260 && (
+              <button onClick={() => toggleDoc(leg.id)} style={{ background: "none", border: "none", color: "#60a5fa", fontSize: 12, fontFamily: "'JetBrains Mono', monospace", cursor: "pointer", padding: 0, marginBottom: 10, display: "block" }}>
+                {expandedDocs[leg.id] ? (lang === "es" ? "MOSTRAR MENOS ↑" : "SHOW LESS ↑") : (lang === "es" ? "LEER COMPLETO ↓" : "READ FULL TEXT ↓")}
+              </button>
+            )}
             {leg.monto !== "N/A" && <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13.5, color: "#4ade80", marginBottom: 10 }}>{pick(leg.monto, lang)}</div>}
             <SourceChip>{leg.source}</SourceChip>
             {leg.criticas?.length > 0 && <div style={{ marginTop: 14 }}>
@@ -1194,7 +1251,7 @@ export default function App() {
             width: "100%", background: PAYPAL_CONFIGURED ? "linear-gradient(135deg, #0070ba, #003087)" : "rgba(255,255,255,0.06)",
             color: PAYPAL_CONFIGURED ? "white" : "#52525b", border: "none", padding: "17px 0", fontSize: 13, fontFamily: "'JetBrains Mono', monospace",
             fontWeight: 700, letterSpacing: 1, borderRadius: 12, cursor: PAYPAL_CONFIGURED ? "pointer" : "not-allowed",
-          }}>{ui.apoyaButtonPay}{selectedAmount ? ` · $${selectedAmount}` : ""}</button>
+          }}>{ui.apoyaButtonPay}{selectedAmount ? ` · ${selectedAmount}` : ""}</button>
           <div style={{ textAlign: "center", marginTop: 10, fontSize: 11, color: "#71717a" }}>{PAYPAL_CONFIGURED ? ui.apoyaOpensNewTab : ui.apoyaNotConfigured}</div>
         </Crystal>
 
