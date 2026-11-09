@@ -215,10 +215,42 @@ const INVESTORS = [
 // ── Nota de investigación: Pablo José Hernández Rivera / Amigos de Pablo José (FEC C00831487) ──
 // Totales publicados (se comprueban contra las filas del CSV cuando se peguen abajo).
 const PJ_CONTRIB_TOTAL = { count: 80, amount: 37031, jaime: 7600 };
+// Muestra comprobada contra recortes de los documentos de la FEC (se usa solo si el CSV completo aún no está cargado).
+const PJ_SAMPLE = [
+  { txId: "SA11AI.14941", name: "Pavía, Francisco", date: "2024-08-05", amount: 500, employer: "McConnell Valdes LLC", url: "https://docquery.fec.gov/pdf/676/202410159687813676/202410159687813676.pdf#page=157" },
+  { txId: "SA11AI.15265", name: "García Solá, Arturo", date: "2024-09-05", amount: 1000, employer: "McConnell Valdes LLC", url: "https://docquery.fec.gov/pdf/676/202410159687813676/202410159687813676.pdf#page=81" },
+  { txId: "SA11AI.17704", name: "González Suárez, Jaime Fernando", date: "2024-10-27", amount: 3300, employer: "McConnell Valdes LLC", url: "https://docquery.fec.gov/pdf/039/202412059739550039/202412059739550039.pdf#page=53" },
+];
 // PEGAR AQUÍ las 80 filas del CSV de la FEC, una por transacción:
 // { txId: "SA11AI.1234", name: "Apellido, Nombre", date: "2024-03-15", amount: 500, employer: "McConnell Valdés", url: "https://docquery.fec.gov/..." }
 // Los duplicados por txId se descartan automáticamente. No incluir direcciones ni teléfonos.
-const PJ_CONTRIBUTIONS = [];
+// Pegar aquí, entre las comillas invertidas, el contenido completo del CSV (con la fila de encabezados).
+// Columnas que se leen: "ID de transacción FEC", "Nombre en la FEC", "Fecha del donativo", "Donativo USD", "Empleador en la FEC", "Documento FEC".
+const PJ_CSV_RAW = ``;
+const parseCsv = text => {
+  const rows = []; let row = [], cell = "", q = false;
+  const s = text.replace(/^\uFEFF/, "");
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (q) { if (c === '"') { if (s[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === ",") { row.push(cell); cell = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && s[i + 1] === "\n") i++; row.push(cell); cell = ""; if (row.some(x => x.trim() !== "")) rows.push(row); row = []; }
+    else cell += c;
+  }
+  if (cell !== "" || row.length) { row.push(cell); if (row.some(x => x.trim() !== "")) rows.push(row); }
+  return rows;
+};
+const PJ_CONTRIBUTIONS = (() => {
+  const rows = parseCsv(PJ_CSV_RAW); if (rows.length < 2) return [];
+  const h = rows[0].map(x => x.trim());
+  const [iT, iN, iD, iA, iE, iU] = ["ID de transacción FEC", "Nombre en la FEC", "Fecha del donativo", "Donativo USD", "Empleador en la FEC", "Documento FEC"].map(n => h.indexOf(n));
+  if ([iT, iN, iD, iA, iE].some(i => i < 0)) return [];
+  return rows.slice(1).map(r => {
+    const u = iU >= 0 ? (r[iU] || "").trim() : "";
+    return { txId: (r[iT] || "").trim(), name: (r[iN] || "").trim(), date: (r[iD] || "").trim(), amount: Number(String(r[iA] || "0").replace(/[^0-9.\-]/g, "")), employer: (r[iE] || "").trim(), url: /^https:\/\//.test(u) ? u : "" };
+  }).filter(r => r.txId);
+})();
 
 const PJ_NOTA = {
   eyebrow: L("NOTA DE INVESTIGACIÓN · CORTE FEC: 30 SEP 2026", "INVESTIGATION NOTE · FEC DATA THROUGH SEP 30, 2026"),
@@ -899,7 +931,9 @@ function PersonNote({ nota, lang }) {
   const norm = s => (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const isJaime = r => norm(r.name).includes("gonzalez suarez") && norm(r.name).includes("jaime");
   const seen = new Set();
-  const rows = PJ_CONTRIBUTIONS.filter(r => { if (seen.has(r.txId)) return false; seen.add(r.txId); return true; });
+  const source = PJ_CONTRIBUTIONS.length ? PJ_CONTRIBUTIONS : PJ_SAMPLE;
+  const rows = source.filter(r => { if (seen.has(r.txId)) return false; seen.add(r.txId); return true; });
+  const partial = rows.length < PJ_CONTRIB_TOTAL.count;
   const cents = rs => rs.reduce((s, r) => s + Math.round(r.amount * 100), 0);
   const okTotals = rows.length === PJ_CONTRIB_TOTAL.count && cents(rows) === PJ_CONTRIB_TOTAL.amount * 100 && cents(rows.filter(isJaime)) === PJ_CONTRIB_TOTAL.jaime * 100;
   const shown = onlyTreasurer ? rows.filter(isJaime) : rows;
@@ -971,16 +1005,16 @@ function PersonNote({ nota, lang }) {
       {rows.length > 0 && (
         <div>
           <button onClick={() => setOpen(o => !o)} aria-expanded={open} style={{ width: "100%", textAlign: "left", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.14)", color: "#e4e4e7", padding: "13px 16px", borderRadius: 10, cursor: "pointer", fontSize: 13, fontFamily: "'JetBrains Mono', monospace" }}>
-            {open ? "▾ " : "▸ "}{t(nota.verTodas)}
+            {open ? "▾ " : "▸ "}{partial ? (lang === "en" ? `See verified sample (${rows.length} of ${PJ_CONTRIB_TOTAL.count})` : `Ver muestra comprobada (${rows.length} de ${PJ_CONTRIB_TOTAL.count})`) : t(nota.verTodas)}
           </button>
           {open && (
             <div style={{ marginTop: 12 }}>
               <div style={{ fontSize: 11.5, fontFamily: "'JetBrains Mono', monospace", marginBottom: 10, color: okTotals ? "#4ade80" : "#fbbf24" }}>
-                {okTotals ? `✓ ${rows.length} ${lang === "en" ? "unique transactions" : "transacciones únicas"} · ${money(cents(rows) / 100)} · Jaime ${money(cents(rows.filter(isJaime)) / 100)}`
+                {partial ? `${rows.length} ${lang === "en" ? "of" : "de"} ${PJ_CONTRIB_TOTAL.count} ${lang === "en" ? "transactions checked against the FEC document" : "transacciones comprobadas contra el documento FEC"} · ${money(cents(rows) / 100)} ${lang === "en" ? "of" : "de"} ${money(PJ_CONTRIB_TOTAL.amount)} · ${lang === "en" ? "the full list will be published once the CSV is loaded" : "el listado completo se publicará al cargar el CSV"}` : okTotals ? `✓ ${rows.length} ${lang === "en" ? "unique transactions" : "transacciones únicas"} · ${money(cents(rows) / 100)} · Jaime ${money(cents(rows.filter(isJaime)) / 100)}`
                   : `⚠ ${lang === "en" ? "Pending review: rows do not match published totals" : "Revisión pendiente: las filas no coinciden con los totales publicados"} (${rows.length} / ${money(cents(rows) / 100)})`}
               </div>
               <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "#c4c4c9", marginBottom: 10, cursor: "pointer" }}>
-                <input type="checkbox" checked={onlyTreasurer} onChange={e => setOnlyTreasurer(e.target.checked)} />{t(nota.soloTesorero)}
+                <input type="checkbox" checked={onlyTreasurer} onChange={e => setOnlyTreasurer(e.target.checked)} />{partial ? (lang === "en" ? "Only Jaime's items (sample)" : "Solo partidas de Jaime (muestra)") : t(nota.soloTesorero)}
               </label>
               <div style={{ maxHeight: 380, overflowY: "auto", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10 }}>
                 {shown.map(r => (
