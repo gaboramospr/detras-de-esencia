@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -8,8 +9,8 @@ const pick = (field, lang) => (field && typeof field === "object" && "es" in fie
 
 const UI = {
   es: {
-    tagline: "INVESTIGACIÓN · TRANSPARENCIA CIUDADANA · PUERTO RICO",     lastUpdate: "ÚLTIMA ACTUALIZACIÓN · 02 SEP 2026",
-    nav: { investigacion: "Investigación", personas: "Personas", dinero: "Dinero", conexiones: "Conexiones", proyecto: "El Proyecto", cronologia: "Cronología", medios: "Medios", documentos: "Documentos", metodologia: "Fuentes", apoya: "Apoya", glosario: "Glosario", dc: "Dicen vs. Confirman", descargas: "Descargas" },
+    tagline: "INVESTIGACIÓN · TRANSPARENCIA CIUDADANA · PUERTO RICO",     lastUpdate: "ÚLTIMA ACTUALIZACIÓN · 09 NOV 2026",
+    nav: { investigacion: "Investigación", personas: "Personas", dinero: "Dinero", conexiones: "Conexiones", proyecto: "El Proyecto", cronologia: "Cronología", medios: "Medios", documentos: "Documentos", metodologia: "Fuentes", apoya: "Apoya", glosario: "Glosario", dc: "Dicen vs. Confirman", descargas: "Descargas", interes: "Personas de Interés" },
     glosarioEyebrow: "TÉRMINOS TÉCNICOS", glosarioTitle: "Glosario", glosarioSub: "Los términos legales y de permisos que más aparecen en esta investigación, explicados en simple.",
     dcEyebrow: "CONTRASTE DIRECTO", dcTitle: "Dicen vs. Confirman", dcSub: "Lo que los proponentes de Esencia han dicho públicamente, comparado con lo que documentan las agencias, los tribunales y el expediente oficial.",
     dcDicen: "DICEN LOS PROPONENTES", dcConfirman: "CONFIRMAN LAS AGENCIAS / EL EXPEDIENTE",
@@ -46,7 +47,7 @@ const UI = {
     metEyebrow: "TRUST LAYER", metTitle: "Cómo verificamos la información",
     metSub: "Detrás de Esencia utiliza documentos públicos, registros gubernamentales, datos electorales y fuentes periodísticas identificadas. Cada afirmación relevante puede rastrearse hasta su fuente.",
     primarySources: "FUENTES PRIMARIAS", pressSources: "FUENTES PERIODÍSTICAS", otherSources: "OTRAS FUENTES",
-    disclaimer: "Esta plataforma es de carácter informativo y no realiza alegaciones sin evidencia documental. No constituye asesoramiento legal. Última actualización: 09 de agosto de 2026.",
+    disclaimer: "Esta plataforma es de carácter informativo y no realiza alegaciones sin evidencia documental. No constituye asesoramiento legal. Última actualización: 9 de noviembre de 2026.",
     apoyaNav: "Apoya", apoyaEyebrow: "APOYA ESTA INVESTIGACIÓN", apoyaHeroTitle: "Ayúdanos a seguir investigando",
     apoyaHeroSub: "Detrás de Esencia es una investigación independiente. Tu aportación nos ayuda a continuar documentando, investigando y haciendo pública la información detrás del proyecto Esencia.",
     apoyaMessageTitle: "ESTA INVESTIGACIÓN NECESITA TIEMPO, RECURSOS Y PERSONAS DISPUESTAS A SOSTENERLA",
@@ -74,8 +75,8 @@ const UI = {
     directImpact: "IMPACTO DIRECTO", indirectImpact: "IMPACTO INDIRECTO",
   },
   en: {
-    tagline: "INVESTIGATION · CITIZEN TRANSPARENCY · PUERTO RICO",     lastUpdate: "LAST UPDATED · SEP 02, 2026",
-    nav: { investigacion: "Investigation", personas: "People", dinero: "Money", conexiones: "Connections", proyecto: "The Project", cronologia: "Timeline", medios: "Media", documentos: "Documents", metodologia: "Sources", apoya: "Support", glosario: "Glossary", dc: "Claims vs. Facts", descargas: "Downloads" },
+    tagline: "INVESTIGATION · CITIZEN TRANSPARENCY · PUERTO RICO",     lastUpdate: "LAST UPDATED · NOV 09, 2026",
+    nav: { investigacion: "Investigation", personas: "People", dinero: "Money", conexiones: "Connections", proyecto: "The Project", cronologia: "Timeline", medios: "Media", documentos: "Documents", metodologia: "Sources", apoya: "Support", glosario: "Glossary", dc: "Claims vs. Facts", descargas: "Downloads", interes: "People of Interest" },
     glosarioEyebrow: "TECHNICAL TERMS", glosarioTitle: "Glossary", glosarioSub: "The legal and permitting terms that come up most in this investigation, explained simply.",
     dcEyebrow: "DIRECT CONTRAST", dcTitle: "Claims vs. Facts", dcSub: "What Esencia's developers have said publicly, compared with what agencies, courts, and the official filing document.",
     dcDicen: "DEVELOPERS CLAIM", dcConfirman: "AGENCIES / THE RECORD CONFIRM",
@@ -112,7 +113,7 @@ const UI = {
     metEyebrow: "TRUST LAYER", metTitle: "How we verify this information",
     metSub: "Detrás de Esencia uses public documents, government records, electoral data, and identified journalistic sources. Every significant claim can be traced back to its source.",
     primarySources: "PRIMARY SOURCES", pressSources: "JOURNALISTIC SOURCES", otherSources: "OTHER SOURCES",
-    disclaimer: "This platform is informational and does not make claims without documentary evidence. It does not constitute legal advice. Last updated: August 9, 2026.",
+    disclaimer: "This platform is informational and does not make claims without documentary evidence. It does not constitute legal advice. Last updated: November 9, 2026.",
     apoyaNav: "Support", apoyaEyebrow: "SUPPORT THIS INVESTIGATION", apoyaHeroTitle: "Help us keep investigating",
     apoyaHeroSub: "Detrás de Esencia is an independent investigation. Your contribution helps us keep documenting, investigating, and publishing the information behind the Esencia project.",
     apoyaMessageTitle: "THIS INVESTIGATION NEEDS TIME, RESOURCES, AND PEOPLE WILLING TO SUSTAIN IT",
@@ -211,6 +212,100 @@ const INVESTORS = [
   },
 ];
 
+// ── Nota de investigación: Pablo José Hernández Rivera / Amigos de Pablo José (FEC C00831487) ──
+// Totales publicados (se comprueban contra las filas del CSV cuando se peguen abajo).
+const PJ_CONTRIB_TOTAL = { count: 80, amount: 37031, jaime: 7600 };
+// Muestra comprobada contra recortes de los documentos de la FEC (se usa solo si el CSV completo aún no está cargado).
+const PJ_SAMPLE = [
+  { txId: "SA11AI.14941", name: "Pavía, Francisco", date: "2024-08-05", amount: 500, employer: "McConnell Valdes LLC", url: "https://docquery.fec.gov/pdf/676/202410159687813676/202410159687813676.pdf#page=157" },
+  { txId: "SA11AI.15265", name: "García Solá, Arturo", date: "2024-09-05", amount: 1000, employer: "McConnell Valdes LLC", url: "https://docquery.fec.gov/pdf/676/202410159687813676/202410159687813676.pdf#page=81" },
+  { txId: "SA11AI.17704", name: "González Suárez, Jaime Fernando", date: "2024-10-27", amount: 3300, employer: "McConnell Valdes LLC", url: "https://docquery.fec.gov/pdf/039/202412059739550039/202412059739550039.pdf#page=53" },
+];
+// PEGAR AQUÍ las 80 filas del CSV de la FEC, una por transacción:
+// { txId: "SA11AI.1234", name: "Apellido, Nombre", date: "2024-03-15", amount: 500, employer: "McConnell Valdés", url: "https://docquery.fec.gov/..." }
+// Los duplicados por txId se descartan automáticamente. No incluir direcciones ni teléfonos.
+// Pegar aquí, entre las comillas invertidas, el contenido completo del CSV (con la fila de encabezados).
+// Columnas que se leen: "ID de transacción FEC", "Nombre en la FEC", "Fecha del donativo", "Donativo USD", "Empleador en la FEC", "Documento FEC".
+const PJ_CSV_RAW = ``;
+const parseCsv = text => {
+  const rows = []; let row = [], cell = "", q = false;
+  const s = text.replace(/^\uFEFF/, "");
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (q) { if (c === '"') { if (s[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === ",") { row.push(cell); cell = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && s[i + 1] === "\n") i++; row.push(cell); cell = ""; if (row.some(x => x.trim() !== "")) rows.push(row); row = []; }
+    else cell += c;
+  }
+  if (cell !== "" || row.length) { row.push(cell); if (row.some(x => x.trim() !== "")) rows.push(row); }
+  return rows;
+};
+const PJ_CONTRIBUTIONS = (() => {
+  const rows = parseCsv(PJ_CSV_RAW); if (rows.length < 2) return [];
+  const h = rows[0].map(x => x.trim());
+  const [iT, iN, iD, iA, iE, iU] = ["ID de transacción FEC", "Nombre en la FEC", "Fecha del donativo", "Donativo USD", "Empleador en la FEC", "Documento FEC"].map(n => h.indexOf(n));
+  if ([iT, iN, iD, iA, iE].some(i => i < 0)) return [];
+  return rows.slice(1).map(r => {
+    const u = iU >= 0 ? (r[iU] || "").trim() : "";
+    return { txId: (r[iT] || "").trim(), name: (r[iN] || "").trim(), date: (r[iD] || "").trim(), amount: Number(String(r[iA] || "0").replace(/[^0-9.\-]/g, "")), employer: (r[iE] || "").trim(), url: /^https:\/\//.test(u) ? u : "" };
+  }).filter(r => r.txId);
+})();
+
+const PJ_NOTA = {
+  eyebrow: L("NOTA DE INVESTIGACIÓN · CORTE FEC: 30 SEP 2026", "INVESTIGATION NOTE · FEC DATA THROUGH SEP 30, 2026"),
+  titulo: L("McConnell Valdés, la firma de cabildeo del proponente de Esencia, y los donativos al comité de Pablo José", "McConnell Valdés, the lobbying firm of Esencia's developer, and the donations to Pablo José's committee"),
+  committee: { name: "Amigos de Pablo José", id: "C00831487", url: "https://www.fec.gov/data/committee/C00831487/?cycle=2024&tab=about-committee",
+    label: L("COMITÉ DE CAMPAÑA", "CAMPAIGN COMMITTEE") },
+  p1: L("McConnell Valdés, LLC figura como firma de cabildeo de Cabo Rojo Land Acquisition, LLC, la empresa proponente del Proyecto Esencia. La Oficina de Gerencia de Permisos identifica a Cabo Rojo Land Acquisition como proponente en su resolución ambiental. Por su parte, el Registro de Cabilderos del Departamento de Justicia de Puerto Rico incluye a esa empresa entre los clientes de McConnell Valdés en la entrada 2026Q1-00263.",
+        "McConnell Valdés, LLC is listed as the lobbying firm for Cabo Rojo Land Acquisition, LLC, the developer of the Esencia Project. The Permit Management Office (OGPe) identifies Cabo Rojo Land Acquisition as the proponent in its environmental resolution. The Puerto Rico Department of Justice's Lobbyist Registry, for its part, lists that company among McConnell Valdés' clients in entry 2026Q1-00263."),
+  docsLabel: L("Documentos:", "Documents:"),
+  docs: [
+    { t: L("Resolución ambiental de la OGPe · caso 2024-579429-DIA-300042", "OGPe environmental resolution · case 2024-579429-DIA-300042"), url: "https://docs.pr.gov/files/OGPe/Documentos%20Ambientales/2024-579429-DIA-300042-%20Resolucion.pdf" },
+    { t: L("Registro de Cabilderos de Justicia · entrada 2026Q1-00263", "Justice Dept. Lobbyist Registry · entry 2026Q1-00263"), url: "https://registrodecabilderos.pr.gov/Lobbyist/Details" },
+  ],
+  p2: L("Los registros de la Comisión Federal de Elecciones (FEC) identifican 80 aportaciones individuales por $37,031 al comité Amigos de Pablo José de personas que declararon a McConnell Valdés como patrono. El desglose es de 61 aportaciones individuales por $30,160 en 2023–2024 y 19 por $6,871 en 2025–2026, con corte al 30 de septiembre de 2026.",
+        "Federal Election Commission (FEC) records identify 80 individual contributions totaling $37,031 to the Amigos de Pablo José committee from people who declared McConnell Valdés as their employer. The breakdown is 61 individual contributions totaling $30,160 in 2023–2024 and 19 totaling $6,871 in 2025–2026, as of September 30, 2026."),
+  stats: [
+    { v: "80", l: L("aportaciones individuales", "individual contributions") },
+    { v: "$37,031", l: L("total · patrono declarado: McConnell Valdés", "total · declared employer: McConnell Valdés") },
+    { v: "$7,600", l: L("del tesorero del comité, incluidas en el total", "from the committee's treasurer, included in the total") },
+  ],
+  periodos: [ { l: "2023–2024", n: 61, a: 30160 }, { l: "2025–2026", n: 19, a: 6871 } ],
+  periodosLabel: L("APORTACIONES INDIVIDUALES POR PERIODO · PATRONO DECLARADO: MCCONNELL VALDÉS", "INDIVIDUAL CONTRIBUTIONS BY PERIOD · DECLARED EMPLOYER: MCCONNELL VALDÉS"),
+  aportLabel: L("aportaciones", "contributions"),
+  p3: L("Entre los donantes está el propio tesorero del comité. Jaime Fernando González Suárez, abogado de McConnell Valdés (Income Member, Corporate Practice Group), figura como tesorero de Amigos de Pablo José en el Formulario 1 de la FEC, radicado el 30 de enero de 2026. Su nombre aparece en la página 3, sección 8, «Treasurer». Sus aportaciones individuales suman $7,600, incluidos en los $37,031 del total.",
+        "One of the donors is the committee's own treasurer. Jaime Fernando González Suárez, a McConnell Valdés attorney (Income Member, Corporate Practice Group), is listed as treasurer of Amigos de Pablo José on FEC Form 1, filed January 30, 2026. His name appears on page 3, section 8, \"Treasurer\". His individual contributions total $7,600, included in the $37,031 overall total."),
+  relTitulo: L("TRES RELACIONES DOCUMENTADAS, POR SEPARADO", "THREE DOCUMENTED RELATIONSHIPS, KEPT SEPARATE"),
+  relaciones: [
+    { t: L("La firma, cabildera del proponente", "The firm, lobbyist for the developer"),
+      sustenta: L("El Registro de Cabilderos (entrada 2026Q1-00263) y la resolución ambiental de la OGPe, que identifica a Cabo Rojo Land Acquisition como proponente.", "The Lobbyist Registry (entry 2026Q1-00263) and the OGPe environmental resolution, which identifies Cabo Rojo Land Acquisition as the proponent."),
+      limite: L("No identifica gestiones específicas de cabildeo ni qué personas las realizaron.", "It does not identify specific lobbying efforts or which individuals carried them out.") },
+    { t: L("Los donativos, a nombre de personas", "The donations, in individuals' names"),
+      sustenta: L("Los registros de la FEC: aportaciones individuales de personas que declararon a McConnell Valdés como patrono.", "FEC records: individual contributions from people who declared McConnell Valdés as their employer."),
+      limite: L("Cada aportación está registrada a nombre de una persona; el patrono es un dato declarado por el donante.", "Each contribution is recorded in an individual's name; the employer is a detail declared by the donor.") },
+    { t: L("Jaime, tesorero del comité", "Jaime, the committee's treasurer"),
+      sustenta: L("El Formulario 1 de la FEC (página 3, sección 8) y su perfil profesional en McConnell Valdés.", "FEC Form 1 (page 3, section 8) and his professional profile at McConnell Valdés."),
+      limite: L("Su cargo de tesorero y su empleo no documentan, por sí solos, gestiones de cabildeo por Esencia.", "His role as treasurer and his employment do not, by themselves, document lobbying efforts for Esencia.") },
+  ],
+  sustentaLabel: L("Lo que la sustenta:", "What supports it:"),
+  limiteLabel: L("Lo que no demuestra:", "What it does not show:"),
+  limiteEditorial: L("Esta nota no atribuye a ninguna persona gestiones específicas de cabildeo por Esencia: hacerlo requeriría un documento que identifique esa gestión. Figurar en los registros documenta una función o una aportación, no conducta indebida.",
+                     "This note does not attribute to any individual specific lobbying efforts for Esencia: doing so would require a document identifying that effort. Appearing in the records documents a role or a contribution, not wrongdoing."),
+  fuentesLabel: L("FUENTES OFICIALES Y REGISTRO DE APORTACIONES", "OFFICIAL SOURCES AND CONTRIBUTION RECORD"),
+  fuentes: [
+    { t: L("Resolución ambiental de la OGPe · caso 2024-579429-DIA-300042", "OGPe environmental resolution · case 2024-579429-DIA-300042"), url: "https://docs.pr.gov/files/OGPe/Documentos%20Ambientales/2024-579429-DIA-300042-%20Resolucion.pdf" },
+    { t: L("Registro de Cabilderos de Justicia · buscar la entrada 2026Q1-00263", "Justice Dept. Lobbyist Registry · search entry 2026Q1-00263"), url: "https://registrodecabilderos.pr.gov/Lobbyist/Details" },
+    { t: L("Ficha oficial de Amigos de Pablo José · C00831487", "Official profile of Amigos de Pablo José · C00831487"), url: "https://www.fec.gov/data/committee/C00831487/?cycle=2024&tab=about-committee" },
+    { t: L("Formulario 1 del comité · página 3, sección 8", "Committee Form 1 · page 3, section 8"), url: "https://docquery.fec.gov/pdf/564/202601309794548564/202601309794548564.pdf#page=3" },
+    { t: L("Perfil profesional de Jaime González Suárez en McConnell Valdés", "Jaime González Suárez's professional profile at McConnell Valdés"), url: "https://www.mcvpr.com/attorneys/Jaime-Gonzalez-Suarez" },
+  ],
+  verTodas: L("Ver las 80 aportaciones individuales", "See all 80 individual contributions"),
+  soloTesorero: L("Solo partidas de Jaime ($7,600)", "Only Jaime's items ($7,600)"),
+  colPatrono: L("Patrono declarado", "Declared employer"),
+  verFec: L("DOCUMENTO FEC →", "FEC DOCUMENT →"),
+};
+
 const POLITICIANS = [
   { id: "pol-001", name: "Thomas Rivera Schatz", party: "PNP", position: L("Presidente del Senado de Puerto Rico", "President of the Puerto Rico Senate"), tag: L("RECIBIÓ DONACIÓN", "RECEIVED DONATION"), totalReceived: 6200,
     donations: [
@@ -272,7 +367,7 @@ const POLITICIANS = [
     statements: [
       { date: "2026-03-23", texto: L("Ese proyecto tiene que cumplir con todas las reglamentaciones ambientales y si cuenta con el cumplimiento de todas las leyes y reglamentaciones y con el respaldo local que, a mi juicio, quien mejor lo representa es el alcalde… entonces no veo correcto que desde San Juan o Washington se interfiera.", "That project has to comply with all environmental regulations, and if it complies with all laws and regulations and has local backing — which, in my view, the mayor best represents — then I don't think it's right for San Juan or Washington to interfere."), fuente: "Pablo José Hernández Rivera, Presidente del PPD – NotiCel, 23/mar/2026" },
     ] },
-  { id: "pol-018", name: "Pablo José Hernández Rivera", party: "PPD", position: L("Comisionado Residente de Puerto Rico · Presidente del PPD", "Resident Commissioner of Puerto Rico · PPD President"), tag: L("GOBIERNO", "GOVERNMENT"), totalReceived: 0, donations: [], legislation: [],
+  { id: "pol-018", name: "Pablo José Hernández Rivera", party: "PPD", nota: PJ_NOTA, position: L("Comisionado Residente de Puerto Rico · Presidente del PPD", "Resident Commissioner of Puerto Rico · PPD President"), tag: L("GOBIERNO", "GOVERNMENT"), totalReceived: 0, donations: [], legislation: [],
     statements: [
       { date: "2026-03-23", texto: L("Ese proyecto tiene que cumplir con todas las reglamentaciones ambientales y si cuenta con el cumplimiento de todas las leyes y reglamentaciones y con el respaldo local que, a mi juicio, quien mejor lo representa es el alcalde… entonces no veo correcto que desde San Juan o Washington se interfiera.", "That project has to comply with all environmental regulations, and if it complies with all laws and regulations and has local backing — which, in my view, the mayor best represents — then I don't think it's right for San Juan or Washington to interfere."), fuente: "NotiCel, 23/mar/2026" },
       { date: "2025-12-26", texto: L("El secretario general del PIP, Juan Dalmau, lo emplazó públicamente por su silencio tras la aprobación de la DIA de Esencia. A la fecha, no consta una respuesta pública documentada de Hernández Rivera sobre este señalamiento.", "PIP Secretary General Juan Dalmau publicly called him out for his silence after Esencia's environmental determination was approved. To date, there is no documented public response from Hernández Rivera on this."), fuente: "Telemundo PR, 26/dic/2025" },
@@ -547,16 +642,119 @@ const DICEN_CONFIRMAN = [
 ];
 
 const DOWNLOADS = [
+  { t: L("Consulta de Ubicación 2026-693109-CUB-013470 — documento oficial OGPe", "Location Consultation 2026-693109-CUB-013470 — official OGPe document"), tipo: L("DOCUMENTO OFICIAL", "OFFICIAL DOCUMENT"), date: "19 ago 2026", url: "https://docs.pr.gov/files/OGPe/Documentos%20Ambientales/CUB_ESENCIA_2026-693109-CUB-013470.pdf" },
+  { t: L("Expediente de la Consulta de Ubicación — Proyecto Esencia", "Location Consultation filing — Esencia Project"), tipo: L("DOCUMENTO OFICIAL", "OFFICIAL DOCUMENT"), date: "31 jul 2026", url: "https://docs.pr.gov/files/OGPe/Esencia/PROYECTO%20ESENCIA_Consulta_de_UbicaciOn-2026-693109-CUB-013470.pdf" },
+  { t: L("Resolución — Determinación de Cumplimiento Ambiental de Esencia", "Resolution — Esencia Environmental Compliance Determination"), tipo: L("DOCUMENTO OFICIAL", "OFFICIAL DOCUMENT"), date: "23 dic 2025", url: "https://docs.pr.gov/files/OGPe/Documentos%20Ambientales/2024-579429-DIA-300042-%20Resolucion.pdf" },
+  { t: L("Aviso Público — Determinación de Cumplimiento Ambiental (DIA) de Esencia", "Public Notice — Esencia Environmental Compliance Determination (EIS)"), tipo: L("DOCUMENTO OFICIAL", "OFFICIAL DOCUMENT"), date: "24 dic 2025", url: "https://docs.pr.gov/files/OGPe/Documentos%20Ambientales/aviso_p%C3%BAblico_ESENCIA_2024-579429-DIA-300042_.jpg" },
+  { t: L("Publicación de Aviso Público — Esencia, Cabo Rojo", "Public Notice Publication — Esencia, Cabo Rojo"), tipo: L("DOCUMENTO OFICIAL", "OFFICIAL DOCUMENT"), date: "4 feb 2025", url: "https://docs.pr.gov/files/OGPe/Documentos%20Ambientales/Aviso_Publico_Periodico__Esencia_CaboRojo.pdf" },
   { t: L("P. de la C. 1363 — texto oficial de la medida", "H.B. 1363 — official bill text"), tipo: L("DOCUMENTO LEGISLATIVO", "LEGISLATIVE DOCUMENT"), date: "17 ago 2026", url: "https://sutra.oslpr.org/SutraFilesGen/161888/PC1363.docx" },
   { t: L("P. de la C. 1363 — trámite legislativo (SUTRA)", "H.B. 1363 — legislative record (SUTRA)"), tipo: L("REGISTRO OFICIAL", "OFFICIAL RECORD"), date: "17 ago 2026", url: "https://sutra.oslpr.org/medidas/161888" },
   { t: L("Ley 82-2026 — texto completo", "Act 82-2026 — full text"), tipo: L("LEY VIGENTE", "CURRENT LAW"), date: "2026", url: "https://www.lexjuris.com/lexlex/Leyes2026/lexl2026082.htm" },
   { t: L("Resolución 2026-02 — Asociación de Economistas de PR", "Resolution 2026-02 — PR Association of Economists"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "20 ago 2026", url: "https://www.elnuevodia.com/noticias/locales/notas/asociacion-de-economistas-advierte-que-beneficios-de-esencia-no-compensarian-costos-y-riesgos-para-cabo-rojo/" },
-  { t: L("Aprobación de la Consulta de Ubicación — expediente OGPe", "Location Consultation approval — OGPe filing"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "31 jul 2026", url: "https://mareaecologista.com/2026/07/estocada-a-cabo-rojo-ogpe-aprueba-la-consulta-de-ubicacion-del-megaproyecto-esencia/" },
   { t: L("Investigación del representante Emilio Carlo Acosta", "Rep. Emilio Carlo Acosta's investigation"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "6 ago 2026", url: "https://noticel.com/noticias/20260806/esencia-no-tiene-agua-luz-ni-espacio-para-su-basura-revela-investigacion-de-representante-pnp/" },
   { t: L("Segunda vista pública del Senado — basura y agua sin resolver", "Second Senate public hearing — trash and water unresolved"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "2 sep 2026", url: "https://noticel.com/noticias/20260902/esencia-sin-claridad-el-manejo-de-basura/" },
   { t: L("Repudio a la aprobación de la DIA — Juan Dalmau", "Repudiation of environmental review approval — Juan Dalmau"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "26 dic 2025", url: "https://www.telemundopr.com/noticias/puerto-rico/juan-dalmau-repudia-aprobacion-de-cumplimiento-ambiental-sobre-proyecto-esencia/2775051/" },
   { t: L("La AAA confirma que no tiene capacidad de agua", "AAA confirms it has no water capacity"), tipo: L("COBERTURA PERIODÍSTICA", "NEWS COVERAGE"), date: "3 ago 2026", url: "https://www.elvocero.com/gobierno/agencias/aaa-reitera-que-no-recomend-el-proyecto-esencia-por-falta-de-capacidad-para-suplir-agua/article_e25d6711-3750-4a51-9134-0fea0590a44c.html" },
   { t: L("Manifiesto \"Declarado: Esencia No Va\"", "\"Declarado: Esencia No Va\" manifesto"), tipo: L("MANIFIESTO CIUDADANO", "CITIZEN MANIFESTO"), date: "16 ago 2026", url: "https://www.declaradoesencianova.com" },
+  { t: L("Portal oficial de documentos y permisos — OGPe / DDEC", "Official documents and permits portal — OGPe / DDEC"), tipo: L("PORTAL OFICIAL", "OFFICIAL PORTAL"), date: "—", url: "https://www.permisos.pr.gov/fuentes-de-informacion" },
+];
+
+const POI_CATS = { capital: "Capital y financiamiento", arquitectura: "Arquitectura y diseño", vendedores: "Vendedores de terrenos y adquisición", portavoces: "Portavoces", rp: "Relaciones públicas", legal: "Representación legal", medios: "Medios, publicidad y difusión", consultores: "Consultores técnicos" };
+const POI_STATUS = {
+  documento_primario: { label: "DOCUMENTO PRIMARIO", color: "#4ade80" },
+  comunicado: { label: "COMUNICADO DEL PROYECTO", color: "#60a5fa" },
+  reportaje: { label: "REPORTAJE PERIODÍSTICO", color: "#fbbf24" },
+  pendiente: { label: "PENDIENTE DE CORROBORACIÓN", color: "#f87171" },
+};
+
+const PEOPLE_OF_INTEREST = [
+  { id: "poi-001", name: "Jamie Reuben", cat: "capital", rol: "Principal de Reuben Brothers", estado: "comunicado",
+    relacion: "Identificado como principal de Reuben Brothers, co-financiadora de Esencia.", entidad: "Reuben Brothers", fechaHecho: "11 ago 2026", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "Comunicado de los desarrolladores — PR Newswire, 11/ago/2026", fuenteUrl: "https://www.prnewswire.com/news-releases/puerto-rico-grants-approval-for-esencia-activating-2-billion-investment-on-the-southwest-coast-302848548.html",
+    demuestra: "El comunicado oficial de los desarrolladores lo identifica con ese cargo.", falta: "No se ha corroborado independientemente su porcentaje de participación ni el monto aportado." },
+  { id: "poi-002", name: "JPMorgan Chase", cat: "capital", rol: "Posible financiador — sin corroborar", estado: "pendiente",
+    relacion: "Una publicación de la National Puerto Rican Agenda (capítulo Nueva York) sobre protestas lo identifica como financiador de Esencia.", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "N/D", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "National Puerto Rican Agenda, capítulo de Nueva York", fuenteUrl: "https://www.nprany.org/",
+    demuestra: "Únicamente que una organización comunitaria lo señaló públicamente como financiador.", falta: "No se ha localizado contrato de préstamo, hipoteca ni confirmación directa del banco. No se presenta como financiador confirmado ni se dibuja una conexión financiera definitiva." },
+  { id: "poi-003", name: "Álvarez-Díaz & Villalón (AD&V)", cat: "arquitectura", rol: "Firma participante en el plan maestro", estado: "comunicado",
+    relacion: "Identificada en el comunicado de los desarrolladores como parte del equipo de diseño del plan maestro de Esencia.", entidad: "Three Rules Capital", fechaHecho: "11 ago 2026", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "Comunicado de los desarrolladores — PR Newswire, 11/ago/2026", fuenteUrl: "https://www.prnewswire.com/news-releases/puerto-rico-grants-approval-for-esencia-activating-2-billion-investment-on-the-southwest-coast-302848548.html",
+    demuestra: "El comunicado declara su participación en el diseño del conjunto.", falta: "No se especifica el alcance exacto de su encargo dentro del plan maestro." },
+  { id: "poi-004", name: "EDSA", cat: "arquitectura", rol: "Arquitectura paisajista y planificación", estado: "comunicado",
+    relacion: "Firma colaboradora de arquitectura paisajista y planificación de Esencia, según el comunicado de los desarrolladores.", entidad: "Three Rules Capital", fechaHecho: "11 ago 2026", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "Comunicado de los desarrolladores — PR Newswire, 11/ago/2026", fuenteUrl: "https://www.prnewswire.com/news-releases/puerto-rico-grants-approval-for-esencia-activating-2-billion-investment-on-the-southwest-coast-302848548.html",
+    demuestra: "El comunicado declara su participación.", falta: "No se especifica el alcance exacto de su encargo." },
+  { id: "poi-005", name: "Pablo Massari", cat: "arquitectura", rol: "Principal de EDSA citado sobre el diseño", estado: "comunicado",
+    relacion: "Citado en el comunicado de los desarrolladores como principal de EDSA hablando sobre el diseño de Esencia.", entidad: "EDSA", fechaHecho: "11 ago 2026", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "Comunicado de los desarrolladores — PR Newswire, 11/ago/2026", fuenteUrl: "https://www.prnewswire.com/news-releases/puerto-rico-grants-approval-for-esencia-activating-2-billion-investment-on-the-southwest-coast-302848548.html",
+    demuestra: "El comunicado lo cita directamente.", falta: "N/A." },
+  { id: "poi-006", name: "Studio MK27 (Marcio Kogan)", cat: "arquitectura", rol: "Diseño anunciado del Mandarin Oriental, Puerto Rico", estado: "comunicado",
+    relacion: "Firma anunciada para el diseño del Mandarin Oriental, Puerto Rico, dentro de Esencia.", entidad: "Three Rules Capital", fechaHecho: "11 ago 2026", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "Comunicado de los desarrolladores — PR Newswire, 11/ago/2026", fuenteUrl: "https://www.prnewswire.com/news-releases/puerto-rico-grants-approval-for-esencia-activating-2-billion-investment-on-the-southwest-coast-302848548.html",
+    demuestra: "El comunicado anuncia este encargo específico.", falta: "N/A." },
+  { id: "poi-007", name: "Rees Jones", cat: "arquitectura", rol: "Diseñador anunciado de un campo de golf", estado: "comunicado",
+    relacion: "Diseñador anunciado de uno de los campos de golf de Esencia.", entidad: "Three Rules Capital", fechaHecho: "11 ago 2026", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "Comunicado de los desarrolladores — PR Newswire, 11/ago/2026", fuenteUrl: "https://www.prnewswire.com/news-releases/puerto-rico-grants-approval-for-esencia-activating-2-billion-investment-on-the-southwest-coast-302848548.html",
+    demuestra: "El comunicado anuncia este encargo específico.", falta: "N/A." },
+  { id: "poi-008", name: "Natasha Jordán", cat: "arquitectura", rol: "Arquitecta de AD&V", estado: "reportaje",
+    relacion: "Arquitecta de AD&V que presentó el diseño de Esencia durante las vistas públicas de marzo de 2025.", entidad: "Álvarez-Díaz & Villalón (AD&V)", fechaHecho: "mar 2025", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "CPI, \"Las miradas silenciosas del proyecto Esencia\", mar 2025", fuenteUrl: "https://periodismoinvestigativo.com/2025/03/vistas-publicas-esencia-cabo-rojo/",
+    demuestra: "El CPI documentó su presentación directa en las vistas públicas.", falta: "N/A." },
+  { id: "poi-009", name: "Antonio Fas Alzamora", cat: "vendedores", rol: "Vendedor de terrenos", estado: "documento_primario",
+    relacion: "Vendió terrenos a Cabo Rojo Land Acquisition LLC, junto a su hermana Margarita Fas Alzamora (transacción vinculada — no sumar el total dos veces).", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "entre mar–jun 2024 (fecha exacta de escritura no especificada)", fechaRevision: "09 sep 2026",
+    monto: "$8.25 millones (parte de $16.5M en conjunto con Margarita Fas Alzamora)",
+    fuenteTexto: "El Nuevo Día, \"Trato hecho\" (Registro de la Propiedad)", fuenteUrl: "https://www.elnuevodia.com/negocios/bienes-raices/notas/trato-hecho-10-transacciones-millonarias-entre-abril-y-junio-de-2024/",
+    demuestra: "El Registro de la Propiedad, citado por El Nuevo Día, documenta la venta.", falta: "La fecha exacta de la escritura individual no fue reportada." },
+  { id: "poi-010", name: "Margarita Fas Alzamora", cat: "vendedores", rol: "Vendedora de terrenos", estado: "documento_primario",
+    relacion: "Vendió terrenos a Cabo Rojo Land Acquisition LLC, junto a su hermano Antonio Fas Alzamora (transacción vinculada — no sumar el total dos veces).", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "entre mar–jun 2024 (fecha exacta de escritura no especificada)", fechaRevision: "09 sep 2026",
+    monto: "$8.25 millones (parte de $16.5M en conjunto con Antonio Fas Alzamora)",
+    fuenteTexto: "El Nuevo Día, \"Trato hecho\" (Registro de la Propiedad)", fuenteUrl: "https://www.elnuevodia.com/negocios/bienes-raices/notas/trato-hecho-10-transacciones-millonarias-entre-abril-y-junio-de-2024/",
+    demuestra: "El Registro de la Propiedad, citado por El Nuevo Día, documenta la venta.", falta: "La fecha exacta de la escritura individual no fue reportada." },
+  { id: "poi-011", name: "Roberto Cacho Pérez", cat: "vendedores", rol: "Vendió la entidad Cabo Rojo Land Acquisition LLC", estado: "reportaje",
+    relacion: "Vendió la entidad Cabo Rojo Land Acquisition LLC a Three Rules Capital, según reportó Metro en mayo de 2024 (venta ocurrida ~2 años antes, hacia 2022).", entidad: "Three Rules Capital", fechaHecho: "~2022 (reportado en may 2024)", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "Metro, anuncio del proyecto, may 2024", fuenteUrl: "https://www.metro.pr/noticias/2024/05/24/proponen-desarrollo-turistico-de-2mil-millones-en-aguadilla/",
+    demuestra: "Antecedente de adquisición corporativa de la entidad — no necesariamente de los terrenos.", falta: "No debe confundirse automáticamente con una escritura de venta de terrenos." },
+  { id: "poi-012", name: "Hacienda Santa María (repr. Carlos Rafael Alvarado)", cat: "vendedores", rol: "Vendedora de terrenos", estado: "pendiente",
+    relacion: "Vendió siete fincas (~192 cuerdas) mediante escritura del 19 de agosto de 2025, según una reproducción de tercero de un reportaje de El Nuevo Día del 20/sep/2025. Carlos Rafael Alvarado representa la entidad — no es el propietario personal.", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "19 ago 2025 (escritura)", fechaRevision: "09 sep 2026",
+    monto: "$4.45 millones · ~192 cuerdas · 7 fincas",
+    fuenteTexto: "Reproducción en Scribd — pendiente de cotejo con la edición original de El Nuevo Día", fuenteUrl: "https://es.scribd.com/document/923346161/Esencia-en-Cabo-Rojo",
+    demuestra: "Una reproducción de tercero del reportaje original; el contenido aún no se cotejó con la fuente primaria.", falta: "Cotejar con la edición original de El Nuevo Día o con la escritura pública." },
+  { id: "poi-013", name: "René \"Chile\" Comas", cat: "portavoces", rol: "Abogado y portavoz de Esencia", estado: "reportaje",
+    relacion: "Identificado como abogado y portavoz de Esencia.", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "N/D", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "La Voz Digital, declaraciones de los portavoces", fuenteUrl: "https://lavozdigitalpr.com/esencia-asegura-que-ofrecera-acceso-publico-y-protegera-ecosistema-de-cabo-rojo/",
+    demuestra: "La Voz Digital lo cita en declaraciones como portavoz del proyecto.", falta: "No se le atribuye un bufete ni un contrato específico sin evidencia adicional." },
+  { id: "poi-014", name: "Daniel \"Danny\" Hernández", cat: "rp", rol: "Equipo de relaciones públicas", estado: "reportaje",
+    relacion: "Identificado por el CPI como integrante del equipo de relaciones públicas de Esencia, marzo de 2025.", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "mar 2025", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "CPI, marzo de 2025", fuenteUrl: "https://periodismoinvestigativo.com/2025/03/vistas-publicas-esencia-cabo-rojo/",
+    demuestra: "El CPI documentó su rol en ese momento específico.", falta: "No se confirma si el vínculo continúa vigente, ni se identifica la agencia contratante." },
+  { id: "poi-015", name: "Misael Vargas", cat: "rp", rol: "Equipo de relaciones públicas", estado: "reportaje",
+    relacion: "Identificado por el CPI como integrante del equipo de relaciones públicas de Esencia, marzo de 2025.", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "mar 2025", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "CPI, marzo de 2025", fuenteUrl: "https://periodismoinvestigativo.com/2025/03/vistas-publicas-esencia-cabo-rojo/",
+    demuestra: "El CPI documentó su rol en ese momento específico.", falta: "No se confirma si el vínculo continúa vigente, ni se identifica la agencia contratante." },
+  { id: "poi-016", name: "Muñoz Benítez Brugueras & Cruz", cat: "legal", rol: "Bufete que representó a Esencia en las vistas", estado: "reportaje",
+    relacion: "Bufete identificado representando a Esencia en las vistas públicas de marzo de 2025.", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "mar 2025", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "CPI, marzo de 2025", fuenteUrl: "https://periodismoinvestigativo.com/2025/03/vistas-publicas-esencia-cabo-rojo/",
+    demuestra: "El CPI documentó esta representación específica en esas vistas.", falta: "No se extiende esa representación a todos los asuntos legales del proyecto." },
+  { id: "poi-017", name: "Celio Cruz", cat: "legal", rol: "Abogado — Muñoz Benítez Brugueras & Cruz", estado: "reportaje",
+    relacion: "Abogado identificado por el CPI representando a Esencia en las vistas públicas de marzo de 2025.", entidad: "Muñoz Benítez Brugueras & Cruz", fechaHecho: "mar 2025", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "CPI, marzo de 2025", fuenteUrl: "https://periodismoinvestigativo.com/2025/03/vistas-publicas-esencia-cabo-rojo/",
+    demuestra: "El CPI documentó esta representación específica en esas vistas.", falta: "No se extiende esa representación a todos los asuntos legales del proyecto." },
+  { id: "poi-018", name: "Vionette Benítez", cat: "legal", rol: "Abogada — Muñoz Benítez Brugueras & Cruz", estado: "reportaje",
+    relacion: "Abogada identificada por el CPI representando a Esencia en las vistas públicas de marzo de 2025.", entidad: "Muñoz Benítez Brugueras & Cruz", fechaHecho: "mar 2025", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "CPI, marzo de 2025", fuenteUrl: "https://periodismoinvestigativo.com/2025/03/vistas-publicas-esencia-cabo-rojo/",
+    demuestra: "El CPI documentó esta representación específica en esas vistas.", falta: "No se extiende esa representación a todos los asuntos legales del proyecto." },
+  { id: "poi-019", name: "PR Newswire", cat: "medios", rol: "Distribuyó el comunicado corporativo", estado: "comunicado",
+    relacion: "Distribuyó el comunicado de los desarrolladores del 11 de agosto de 2026.", entidad: "Three Rules Capital / Reuben Brothers", fechaHecho: "11 ago 2026", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "Comunicado publicado en PR Newswire, 11/ago/2026", fuenteUrl: "https://www.prnewswire.com/news-releases/puerto-rico-grants-approval-for-esencia-activating-2-billion-investment-on-the-southwest-coast-302848548.html",
+    demuestra: "Distribución de un comunicado corporativo — no constituye respaldo editorial.", falta: "N/A." },
+  { id: "poi-020", name: "VAG Transportation Engineering Consultants, PSC", cat: "consultores", rol: "Consultora técnica en la DIA", estado: "reportaje",
+    relacion: "Identificada por el CPI entre las firmas que trabajaron en la preparación de la Declaración de Impacto Ambiental de Esencia.", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "mar 2025", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "CPI, marzo de 2025", fuenteUrl: "https://periodismoinvestigativo.com/2025/03/vistas-publicas-esencia-cabo-rojo/",
+    demuestra: "El CPI la identifica entre las firmas consultoras de la DIA.", falta: "Verificar los anexos antes de atribuir estudios específicos a esta firma." },
+  { id: "poi-021", name: "Estudios Técnicos Inc.", cat: "consultores", rol: "Consultora técnica en la DIA", estado: "reportaje",
+    relacion: "Identificada por el CPI entre las firmas que trabajaron en la preparación de la Declaración de Impacto Ambiental de Esencia.", entidad: "Cabo Rojo Land Acquisition LLC", fechaHecho: "mar 2025", fechaRevision: "09 sep 2026", monto: null,
+    fuenteTexto: "CPI, marzo de 2025", fuenteUrl: "https://periodismoinvestigativo.com/2025/03/vistas-publicas-esencia-cabo-rojo/",
+    demuestra: "El CPI la identifica entre las firmas consultoras de la DIA.", falta: "Verificar los anexos antes de atribuir estudios específicos a esta firma." },
 ];
 
 const PROYECTO_CARDS = [
@@ -641,8 +839,10 @@ function Network({ onSelectEdge, onSelectNode, mobile }) {
     "pol-004": { x: 610, y: 180, label: "PNP", t: "pol" }, "pol-005": { x: 610, y: 255, label: "JGC Gov.", t: "pol" },
     "pol-009": { x: 610, y: 330, label: "Romero Lugo", t: "pol" }, "pol-010": { x: 610, y: 405, label: "Ramírez Kurtz", t: "pol" },
     "leg-001": { x: 840, y: 140, label: "$498M Decreto", t: "leg" }, "leg-008": { x: 840, y: 320, label: "Consulta Ubic.", t: "leg" },
+    "poi-fas": { x: 350, y: 70, label: "Hnos. Fas Alzamora", t: "vendor" }, "poi-legal": { x: 350, y: 390, label: "Bufete M.B.B.&C.", t: "legal2" },
+    "poi-media": { x: 120, y: 475, label: "La Voz Digital / GFR", t: "media" },
   };
-  const ts = { investor: { fill: "#0c1220", stroke: "#60a5fa", r: 21 }, company: { fill: "#0c1220", stroke: "#38bdf8", r: 19 }, entity: { fill: "#160c22", stroke: "#a78bfa", r: 23 }, pol: { fill: "#1a0a0a", stroke: "#f87171", r: 21 }, leg: { fill: "#08150c", stroke: "#4ade80", r: 19 } };
+  const ts = { investor: { fill: "#0c1220", stroke: "#60a5fa", r: 21 }, company: { fill: "#0c1220", stroke: "#38bdf8", r: 19 }, entity: { fill: "#160c22", stroke: "#a78bfa", r: 23 }, pol: { fill: "#1a0a0a", stroke: "#f87171", r: 21 }, leg: { fill: "#08150c", stroke: "#4ade80", r: 19 }, vendor: { fill: "#1a1006", stroke: "#fbbf24", r: 18 }, legal2: { fill: "#1a0a16", stroke: "#f472b6", r: 18 }, media: { fill: "#0a1a16", stroke: "#2dd4bf", r: 17 } };
   const links = [
     { s: "inv-001", t: "inv-006", c: "#60a5fa70", label: "vehículo legal común" }, { s: "inv-002", t: "inv-006", c: "#60a5fa70", label: "vehículo legal común" },
     { s: "inv-004", t: "inv-006", c: "#38bdf870", label: "co-desarrolladora" }, { s: "inv-005", t: "inv-006", c: "#38bdf870", label: "co-financiadora" },
@@ -651,6 +851,9 @@ function Network({ onSelectEdge, onSelectNode, mobile }) {
     { s: "inv-001", t: "pol-010", c: "#dc2626aa", label: "$3,100 donado — CEE oct 2024" }, { s: "inv-002", t: "pol-001", c: "#b91c1caa", label: "$3,100 donado — CEE 2024" },
     { s: "inv-002", t: "pol-010", c: "#b91c1caa", label: "$3,100 donado — CEE nov 2024" }, { s: "inv-006", t: "leg-001", c: "#4ade8070", label: "titular del decreto — ~$498M" },
     { s: "inv-006", t: "leg-008", c: "#4ade8070", label: "titular de la consulta de ubicación" }, { s: "pol-005", t: "leg-008", c: "#c4c4c970", label: "administración vigente" },
+    { s: "poi-fas", t: "inv-006", c: "#fbbf2470", label: "vendió terrenos a — $16.5M conjunto, mar–jun 2024 (El Nuevo Día, Registro de la Propiedad)" },
+    { s: "poi-legal", t: "inv-006", c: "#f472b670", label: "representa legalmente — vistas públicas, mar 2025 (CPI)" },
+    { s: "poi-media", t: "inv-004", c: "#2dd4bf70", label: "publicó contenido comercial para — BrandStudio / anuncios pagados (El Nuevo Día, CPI)" },
   ];
   if (mobile) {
     return <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -663,7 +866,7 @@ function Network({ onSelectEdge, onSelectNode, mobile }) {
   }
   return (
     <div>
-      <svg viewBox="0 0 940 440" style={{ display: "block", width: "100%", height: "auto" }}>
+      <svg viewBox="0 0 940 510" style={{ display: "block", width: "100%", height: "auto" }}>
         {links.map((l, i) => {
           const s = nodes[l.s], t = nodes[l.t];
           const active = !selected || l.s === selected || l.t === selected;
@@ -720,6 +923,122 @@ function PersonCard({ person, kind, onOpen, lang, ui }) {
   );
 }
 
+function PersonNote({ nota, lang }) {
+  const [open, setOpen] = useState(false);
+  const [onlyTreasurer, setOnlyTreasurer] = useState(false);
+  const t = x => pick(x, lang);
+  const money = n => "$" + Number(n).toLocaleString(lang === "en" ? "en-US" : "es-PR");
+  const norm = s => (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const isJaime = r => norm(r.name).includes("gonzalez suarez") && norm(r.name).includes("jaime");
+  const seen = new Set();
+  const source = PJ_CONTRIBUTIONS.length ? PJ_CONTRIBUTIONS : PJ_SAMPLE;
+  const rows = source.filter(r => { if (seen.has(r.txId)) return false; seen.add(r.txId); return true; });
+  const partial = rows.length < PJ_CONTRIB_TOTAL.count;
+  const cents = rs => rs.reduce((s, r) => s + Math.round(r.amount * 100), 0);
+  const okTotals = rows.length === PJ_CONTRIB_TOTAL.count && cents(rows) === PJ_CONTRIB_TOTAL.amount * 100 && cents(rows.filter(isJaime)) === PJ_CONTRIB_TOTAL.jaime * 100;
+  const shown = onlyTreasurer ? rows.filter(isJaime) : rows;
+  const lbl = { fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 2, color: "#71717a", marginBottom: 10 };
+  const body = { fontSize: 13.5, color: "#d4d4d8", lineHeight: 1.8, margin: "0 0 14px" };
+  const link = { fontSize: 12, fontFamily: "'JetBrains Mono', monospace", color: "#60a5fa" };
+  return (
+    <div style={{ marginTop: 26, paddingTop: 22, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+      <div style={{ ...lbl, color: "#f87171", marginBottom: 8 }}>{t(nota.eyebrow)}</div>
+      <div style={{ fontSize: 18, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: "#fafafa", lineHeight: 1.3, marginBottom: 16 }}>{t(nota.titulo)}</div>
+
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 16 }}>
+        <Tag color="#f87171">{t(nota.committee.label)}</Tag>
+        <a href={nota.committee.url} target="_blank" rel="noopener noreferrer" style={link}>{nota.committee.name} · FEC {nota.committee.id} →</a>
+      </div>
+
+      <p style={body}>{t(nota.p1)}</p>
+      <div style={{ ...body, display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
+        <span style={{ fontSize: 11, color: "#71717a", fontFamily: "'JetBrains Mono', monospace" }}>{t(nota.docsLabel)}</span>
+        {nota.docs.map((d, i) => <a key={i} href={d.url} target="_blank" rel="noopener noreferrer" style={link}>{t(d.t)} →</a>)}
+      </div>
+
+      <p style={body}>{t(nota.p2)}</p>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 10, marginBottom: 16 }}>
+        {nota.stats.map((s, i) => (
+          <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, padding: "14px 14px" }}>
+            <div style={{ fontSize: 22, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, color: "#fafafa" }}>{s.v}</div>
+            <div style={{ fontSize: 11.5, color: "#a1a1aa", marginTop: 4, lineHeight: 1.5 }}>{t(s.l)}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ marginBottom: 18 }}>
+        <div style={lbl}>{t(nota.periodosLabel)}</div>
+        {nota.periodos.map((p, i) => (
+          <div key={i} style={{ marginBottom: 10 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", gap: 8, fontSize: 12, color: "#d4d4d8", marginBottom: 4 }}>
+              <span>{p.l} · {p.n} {t(nota.aportLabel)}</span>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", color: "#fafafa" }}>{money(p.a)}</span>
+            </div>
+            <div style={{ height: 8, background: "rgba(255,255,255,0.08)", borderRadius: 4 }}>
+              <div style={{ height: 8, width: `${(p.a / PJ_CONTRIB_TOTAL.amount) * 100}%`, background: "#dc2626", borderRadius: 4 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p style={body}>{t(nota.p3)}</p>
+
+      <div style={lbl}>{t(nota.relTitulo)}</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
+        {nota.relaciones.map((r, i) => (
+          <div key={i} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderLeft: "3px solid #f87171", borderRadius: 10, padding: "14px 16px" }}>
+            <div style={{ fontSize: 13.5, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: "#fafafa", marginBottom: 8 }}>{i + 1}. {t(r.t)}</div>
+            <div style={{ fontSize: 12.5, color: "#c4c4c9", lineHeight: 1.7, marginBottom: 6 }}><strong style={{ color: "#e4e4e7" }}>{t(nota.sustentaLabel)} </strong>{t(r.sustenta)}</div>
+            <div style={{ fontSize: 12.5, color: "#a1a1aa", lineHeight: 1.7 }}><strong style={{ color: "#c4c4c9" }}>{t(nota.limiteLabel)} </strong>{t(r.limite)}</div>
+          </div>
+        ))}
+      </div>
+
+      <p style={{ ...body, fontSize: 12.5, color: "#a1a1aa", fontStyle: "italic" }}>{t(nota.limiteEditorial)}</p>
+
+      <div style={lbl}>{t(nota.fuentesLabel)}</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 18 }}>
+        {nota.fuentes.map((f, i) => <a key={i} href={f.url} target="_blank" rel="noopener noreferrer" style={{ ...link, lineHeight: 1.6 }}>→ {t(f.t)}</a>)}
+      </div>
+
+      {rows.length > 0 && (
+        <div>
+          <button onClick={() => setOpen(o => !o)} aria-expanded={open} style={{ width: "100%", textAlign: "left", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.14)", color: "#e4e4e7", padding: "13px 16px", borderRadius: 10, cursor: "pointer", fontSize: 13, fontFamily: "'JetBrains Mono', monospace" }}>
+            {open ? "▾ " : "▸ "}{partial ? (lang === "en" ? `See verified sample (${rows.length} of ${PJ_CONTRIB_TOTAL.count})` : `Ver muestra comprobada (${rows.length} de ${PJ_CONTRIB_TOTAL.count})`) : t(nota.verTodas)}
+          </button>
+          {open && (
+            <div style={{ marginTop: 12 }}>
+              <div style={{ fontSize: 11.5, fontFamily: "'JetBrains Mono', monospace", marginBottom: 10, color: okTotals ? "#4ade80" : "#fbbf24" }}>
+                {partial ? `${rows.length} ${lang === "en" ? "of" : "de"} ${PJ_CONTRIB_TOTAL.count} ${lang === "en" ? "transactions checked against the FEC document" : "transacciones comprobadas contra el documento FEC"} · ${money(cents(rows) / 100)} ${lang === "en" ? "of" : "de"} ${money(PJ_CONTRIB_TOTAL.amount)} · ${lang === "en" ? "the full list will be published once the CSV is loaded" : "el listado completo se publicará al cargar el CSV"}` : okTotals ? `✓ ${rows.length} ${lang === "en" ? "unique transactions" : "transacciones únicas"} · ${money(cents(rows) / 100)} · Jaime ${money(cents(rows.filter(isJaime)) / 100)}`
+                  : `⚠ ${lang === "en" ? "Pending review: rows do not match published totals" : "Revisión pendiente: las filas no coinciden con los totales publicados"} (${rows.length} / ${money(cents(rows) / 100)})`}
+              </div>
+              <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "#c4c4c9", marginBottom: 10, cursor: "pointer" }}>
+                <input type="checkbox" checked={onlyTreasurer} onChange={e => setOnlyTreasurer(e.target.checked)} />{partial ? (lang === "en" ? "Only Jaime's items (sample)" : "Solo partidas de Jaime (muestra)") : t(nota.soloTesorero)}
+              </label>
+              <div style={{ maxHeight: 380, overflowY: "auto", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10 }}>
+                {shown.map(r => (
+                  <div key={r.txId} style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: "wrap", padding: "11px 14px", borderBottom: "1px solid rgba(255,255,255,0.06)", background: isJaime(r) ? "rgba(220,38,38,0.08)" : "transparent" }}>
+                    <div style={{ minWidth: 0, flex: "1 1 200px" }}>
+                      <div style={{ fontSize: 13, color: "#fafafa" }}>{r.name}</div>
+                      <div style={{ fontSize: 11.5, color: "#a1a1aa", marginTop: 2 }}>{t(nota.colPatrono)}: {r.employer}</div>
+                    </div>
+                    <div style={{ textAlign: "right" }}>
+                      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, color: "#f87171", fontWeight: 700 }}>{money(r.amount)}</div>
+                      <div style={{ fontSize: 11, color: "#71717a", fontFamily: "'JetBrains Mono', monospace" }}>{r.date}</div>
+                      {r.url && <a href={r.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", color: "#60a5fa" }}>{t(nota.verFec)}</a>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function PersonModal({ person, kind, onClose, lang, ui }) {
   if (!person) return null;
   const isPol = kind === "pol";
@@ -763,6 +1082,7 @@ function PersonModal({ person, kind, onClose, lang, ui }) {
             <div style={{ marginTop: 6 }}><SourceChip>{s.fuente} · {s.date}</SourceChip></div>
           </div>)}
         </div>}
+        {person.nota && <PersonNote nota={person.nota} lang={lang} />}
         {!isPol && person.relatedEntities?.length > 0 && <div style={{ fontSize: 12, color: "#a1a1aa", marginTop: 8 }}>{ui.relatedEntities}: {person.relatedEntities.join(" · ")}</div>}
         <div style={{ marginTop: 14 }}><SourceChip>{isPol ? (person.donations[0]?.source || ui.seeEvidence) : person.fuente}</SourceChip></div>
       </div>
@@ -779,6 +1099,9 @@ export default function App() {
   const [showAllPol, setShowAllPol] = useState(false);
   const [showAllTl, setShowAllTl] = useState(false);
   const [expandedDocs, setExpandedDocs] = useState({});
+  const [interestFilter, setInterestFilter] = useState("todos");
+  const [interestQuery, setInterestQuery] = useState("");
+  const [expandedInterest, setExpandedInterest] = useState(null);
   const [lang, setLang] = useState("es");
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -837,7 +1160,7 @@ export default function App() {
   const filteredMedia = MEDIA_CASES.filter(m => mediaFilter === "todos" || m.nivel === mediaFilter);
   const filteredDocs = LEGISLATION.filter(l => docFilter === "todo" || l.category === docFilter);
 
-  const NAV_IDS = ["investigacion", "personas", "dinero", "conexiones", "proyecto", "cronologia", "medios", "documentos", "metodologia", "glosario", "dc", "descargas", "apoya"];
+  const NAV_IDS = ["investigacion", "personas", "interes", "dinero", "conexiones", "proyecto", "cronologia", "medios", "documentos", "metodologia", "glosario", "dc", "descargas", "apoya"];
   const [amount, setAmount] = useState(25);
   const [customAmount, setCustomAmount] = useState("");
   useEffect(() => { track("support_page_view"); }, []);
@@ -960,6 +1283,74 @@ export default function App() {
         <div style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 2, color: "#71717a", marginBottom: 10 }}>{ui.politiciansLabel}</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>{POLITICIANS.map(pol => <PersonCard key={pol.id} person={pol} kind="pol" onOpen={openPerson} lang={lang} ui={ui} />)}</div>
       </section>
+
+      {/* PERSONAS DE INTERÉS */}
+      <section id="interes" style={{ maxWidth: 900, margin: "0 auto", padding: "70px 20px", position: "relative", zIndex: 1 }}>
+        <SectionHead eyebrow="RED EXTENDIDA" title="Personas de interés" sub="Personas y entidades vinculadas al proyecto: quién financia, diseña, representa, comunica y participa en la adquisición de terrenos para Esencia." />
+
+        <Crystal hover={false} style={{ padding: "16px 20px", marginBottom: 22 }}>
+          <div style={{ fontSize: 12.5, color: "#c4c4c9", lineHeight: 1.7 }}>
+            Incluir a alguien en esta sección documenta una función o transacción específica; <strong style={{ color: "#fafafa" }}>no implica, por sí solo, conducta indebida</strong>. Cada ficha muestra únicamente el vínculo descrito en su fuente — no todas las afirmaciones de un artículo o comunicado se convierten en hechos verificados.
+          </div>
+        </Crystal>
+
+        <div style={{ marginBottom: 22 }}>
+          <div style={{ fontSize: 10.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: 2, color: "#71717a", marginBottom: 10 }}>YA TIENEN PERFIL COMPLETO EN "PERSONAS"</div>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {[["inv-005", "inv", "Reuben Brothers"], ["inv-004", "inv", "Three Rules Capital"], ["inv-002", "inv", "Will Bennett"], ["inv-001", "inv", "Roberto Ruiz Vargas"], ["inv-003", "inv", "Harish Venkatesh"]].map(([id, kind, name]) => (
+              <button key={id} onClick={() => openPerson(id, kind)} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", color: "#c4c4c9", borderRadius: 20, padding: "8px 14px", fontSize: 12, cursor: "pointer" }}>{name} →</button>
+            ))}
+          </div>
+        </div>
+
+        <input value={interestQuery} onChange={e => setInterestQuery(e.target.value)} placeholder="Buscar por nombre…"
+          style={{ width: "100%", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, padding: "12px 14px", color: "white", fontFamily: "'JetBrains Mono', monospace", fontSize: 13, outline: "none", marginBottom: 14 }} />
+
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 26 }}>
+          {["todos", ...Object.keys(POI_CATS)].map(c => (
+            <button key={c} onClick={() => setInterestFilter(c)} style={{ background: interestFilter === c ? "linear-gradient(135deg,#dc2626,#b91c1c)" : "rgba(255,255,255,0.04)", color: interestFilter === c ? "white" : "#c4c4c9", border: `1px solid ${interestFilter === c ? "transparent" : "rgba(255,255,255,0.12)"}`, padding: "7px 13px", borderRadius: 20, cursor: "pointer", fontSize: 11.5, fontWeight: 600 }}>
+              {c === "todos" ? "Todos" : POI_CATS[c]}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {PEOPLE_OF_INTEREST.filter(p => (interestFilter === "todos" || p.cat === interestFilter) && p.name.toLowerCase().includes(interestQuery.toLowerCase())).map(p => {
+            const st = POI_STATUS[p.estado]; const open = expandedInterest === p.id;
+            return (
+              <Crystal key={p.id} onClick={() => setExpandedInterest(open ? null : p.id)} style={{ padding: "18px 20px" }}>
+                <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+                  <div style={{ width: 46, height: 46, borderRadius: "50%", background: "rgba(255,255,255,0.05)", border: `2px solid ${st.color}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <span style={{ fontSize: 15, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: st.color }}>{p.name.charAt(0)}</span>
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 15, fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: "#fafafa" }}>{p.name}</div>
+                    <div style={{ fontSize: 12, color: "#a1a1aa", marginTop: 3 }}>{p.rol}</div>
+                    <div style={{ marginTop: 8 }}><Tag color={st.color}>{st.label}</Tag><span style={{ marginLeft: 8 }}><Tag>{POI_CATS[p.cat]}</Tag></span></div>
+                  </div>
+                  <div style={{ color: "#52525b", fontSize: 18 }}>{open ? "−" : "+"}</div>
+                </div>
+                {open && (
+                  <div style={{ marginTop: 18, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                    <div style={{ fontSize: 13.5, color: "#d4d4d8", lineHeight: 1.8, marginBottom: 14 }}>{p.relacion}</div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10, marginBottom: 14, fontSize: 12 }}>
+                      <div><span style={{ color: "#71717a" }}>Entidad vinculada: </span><span style={{ color: "#e4e4e7" }}>{p.entidad}</span></div>
+                      <div><span style={{ color: "#71717a" }}>Fecha del hecho: </span><span style={{ color: "#e4e4e7" }}>{p.fechaHecho}</span></div>
+                      <div><span style={{ color: "#71717a" }}>Fecha de revisión: </span><span style={{ color: "#e4e4e7" }}>{p.fechaRevision}</span></div>
+                      {p.monto && <div><span style={{ color: "#71717a" }}>Monto: </span><span style={{ color: "#4ade80", fontFamily: "'JetBrains Mono', monospace" }}>{p.monto}</span></div>}
+                    </div>
+                    <div style={{ fontSize: 12.5, color: "#a1a1aa", lineHeight: 1.7, marginBottom: 8 }}><strong style={{ color: "#c4c4c9" }}>Qué demuestra la fuente: </strong>{p.demuestra}</div>
+                    <div style={{ fontSize: 12.5, color: "#a1a1aa", lineHeight: 1.7, marginBottom: 14 }}><strong style={{ color: "#c4c4c9" }}>Qué falta corroborar: </strong>{p.falta}</div>
+                    <a href={p.fuenteUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ fontSize: 11.5, fontFamily: "'JetBrains Mono', monospace", color: "#60a5fa" }}>VER FUENTE: {p.fuenteTexto} →</a>
+                  </div>
+                )}
+              </Crystal>
+            );
+          })}
+        </div>
+      </section>
+
+      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 20px" }}><Divider /></div>
 
       {/* DINERO */}
       <section id="dinero" style={{ maxWidth: 1180, margin: "0 auto", padding: "0 20px 70px", position: "relative", zIndex: 1 }}>
@@ -1251,7 +1642,7 @@ export default function App() {
             width: "100%", background: PAYPAL_CONFIGURED ? "linear-gradient(135deg, #0070ba, #003087)" : "rgba(255,255,255,0.06)",
             color: PAYPAL_CONFIGURED ? "white" : "#52525b", border: "none", padding: "17px 0", fontSize: 13, fontFamily: "'JetBrains Mono', monospace",
             fontWeight: 700, letterSpacing: 1, borderRadius: 12, cursor: PAYPAL_CONFIGURED ? "pointer" : "not-allowed",
-          }}>{ui.apoyaButtonPay}{selectedAmount ? ` · ${selectedAmount}` : ""}</button>
+          }}>{ui.apoyaButtonPay}{selectedAmount ? ` · $${selectedAmount}` : ""}</button>
           <div style={{ textAlign: "center", marginTop: 10, fontSize: 11, color: "#71717a" }}>{PAYPAL_CONFIGURED ? ui.apoyaOpensNewTab : ui.apoyaNotConfigured}</div>
         </Crystal>
 
